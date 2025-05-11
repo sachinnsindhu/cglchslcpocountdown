@@ -16,6 +16,18 @@
       text-align: center;
       color: #004aad;
     }
+
+    #toggleBtn {
+      display: block;
+      margin: 10px auto;
+      padding: 10px 20px;
+      background: #004aad;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -23,97 +35,136 @@
       background: white;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
+
     th, td {
       padding: 12px 15px;
       text-align: center;
       border-bottom: 1px solid #ddd;
     }
+
     th {
       background-color: #004aad;
       color: white;
     }
+
     tr:hover {
       background-color: #f1f1f1;
     }
+
     @media (max-width: 600px) {
       th, td {
         font-size: 14px;
         padding: 8px;
       }
     }
+
+    /* Dark Mode Styles */
+    .dark-mode {
+      background: #121212;
+      color: #f5f5f5;
+    }
+
+    .dark-mode table {
+      background: #1e1e1e;
+      color: #ffffff;
+    }
+
+    .dark-mode th {
+      background-color: #333;
+      color: #fff;
+    }
+
+    .dark-mode tr:hover {
+      background-color: #2a2a2a;
+    }
+
+    .dark-mode #toggleBtn {
+      background: #555;
+    }
   </style>
 </head>
 <body>
 
-<h1>SSC Exam Countdown</h1>
+  <h1>SSC Exam Countdown</h1>
+  <button onclick="toggleDarkMode()" id="toggleBtn">Toggle Dark Mode</button>
 
-<table>
-  <thead>
-    <tr>
-      <th>Exam Name</th>
-      <th>Exam Date</th>
-      <th>Countdown</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>CGL PRELIMS</td>
-      <td>13 August 2025</td>
-      <td id="countdown1"></td>
-    </tr>
-    <tr>
-      <td>CHSL PRELIMS</td>
-      <td>08 September 2025</td>
-      <td id="countdown2"></td>
-    </tr>
-    <tr>
-      <td>CPO PRELIMS</td>
-      <td>01 September 2025</td>
-      <td id="countdown3"></td>
-    </tr>
-    <tr>
-      <td>DP CONSTABLE</td>
-      <td>01 November 2025</td>
-      <td id="countdown4"></td>
-    </tr>
-    <tr>
-      <td>SSC GD</td>
-      <td>01 January 2026</td>
-      <td id="countdown5"></td>
-    </tr>
-  </tbody>
-</table>
+  <table>
+    <thead>
+      <tr>
+        <th>Exam Name</th>
+        <th>Exam Date</th>
+        <th>Countdown</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>CGL PRELIMS</td>
+        <td>13 August 2025</td>
+        <td id="countdown1"></td>
+      </tr>
+      <tr>
+        <td>CHSL PRELIMS</td>
+        <td>08 September 2025</td>
+        <td id="countdown2"></td>
+      </tr>
+      <tr>
+        <td>CPO PRELIMS</td>
+        <td>01 September 2025</td>
+        <td id="countdown3"></td>
+      </tr>
+      <tr>
+        <td>DP CONSTABLE</td>
+        <td>01 November 2025</td>
+        <td id="countdown4"></td>
+      </tr>
+      <tr>
+        <td>SSC GD</td>
+        <td>01 January 2026</td>
+        <td id="countdown5"></td>
+      </tr>
+    </tbody>
+  </table>
 
-<script>
-  function countdownTimer(id, dateStr) {
-    const targetDate = new Date(dateStr).getTime();
-    const update = () => {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
+  <script>
+    // Load saved dark mode
+    if (localStorage.getItem("darkMode") === "true") {
+      document.body.classList.add("dark-mode");
+    }
 
-      if (distance <= 0) {
-        document.getElementById(id).innerHTML = "Started / Over";
-        return;
-      }
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+      localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+    }
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    function countdownTimer(id, dateStr) {
+      const targetDate = new Date(dateStr).getTime();
+      const update = () => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
 
-      document.getElementById(id).innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    };
+        if (distance <= 0) {
+          document.getElementById(id).innerHTML = "Started / Over";
+          return;
+        }
 
-    update();
-    setInterval(update, 1000);
-  }
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  countdownTimer("countdown1", "August 13, 2025 00:00:00");
-  countdownTimer("countdown2", "September 8, 2025 00:00:00");
-  countdownTimer("countdown3", "September 1, 2025 00:00:00");
-  countdownTimer("countdown4", "November 1, 2025 00:00:00");
-  countdownTimer("countdown5", "January 1, 2026 00:00:00");
-</script>
+        document.getElementById(id).innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      };
+
+      update();
+      setInterval(update, 1000);
+    }
+
+    countdownTimer("countdown1", "August 13, 2025 00:00:00");
+    countdownTimer("countdown2", "September 8, 2025 00:00:00");
+    countdownTimer("countdown3", "September 1, 2025 00:00:00");
+    countdownTimer("countdown4", "November 1, 2025 00:00:00");
+    countdownTimer("countdown5", "January 1, 2026 00:00:00");
+  </script>
 
 </body>
 </html>
