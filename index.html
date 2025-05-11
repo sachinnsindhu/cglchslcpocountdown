@@ -6,38 +6,36 @@
   <title>SSC Exam Countdown</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f2f5;
       margin: 0;
       padding: 20px;
       color: #333;
+      transition: background 0.3s, color 0.3s;
     }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
     h1 {
       text-align: center;
       color: #004aad;
-    }
-
-    #toggleBtn {
-      display: block;
-      margin: 10px auto;
-      padding: 10px 20px;
-      background: #004aad;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+      margin-bottom: 30px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
-      background: white;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     th, td {
-      padding: 12px 15px;
+      padding: 12px;
       text-align: center;
       border-bottom: 1px solid #ddd;
     }
@@ -48,7 +46,51 @@
     }
 
     tr:hover {
-      background-color: #f1f1f1;
+      background-color: #f9f9f9;
+    }
+
+    .dark-mode {
+      background-color: #121212;
+      color: #f5f5f5;
+    }
+
+    .dark-mode .container {
+      background-color: #1e1e1e;
+      box-shadow: none;
+    }
+
+    .dark-mode table {
+      background-color: #2b2b2b;
+      color: #f5f5f5;
+    }
+
+    .dark-mode th {
+      background-color: #333;
+    }
+
+    .dark-mode tr:hover {
+      background-color: #444;
+    }
+
+    .bottom-button {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    #toggleBtn {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #004aad;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #toggleBtn:hover {
+      background-color: #0060df;
     }
 
     @media (max-width: 600px) {
@@ -56,38 +98,18 @@
         font-size: 14px;
         padding: 8px;
       }
-    }
 
-    /* Dark Mode Styles */
-    .dark-mode {
-      background: #121212;
-      color: #f5f5f5;
-    }
-
-    .dark-mode table {
-      background: #1e1e1e;
-      color: #ffffff;
-    }
-
-    .dark-mode th {
-      background-color: #333;
-      color: #fff;
-    }
-
-    .dark-mode tr:hover {
-      background-color: #2a2a2a;
-    }
-
-    .dark-mode #toggleBtn {
-      background: #555;
+      #toggleBtn {
+        font-size: 14px;
+        padding: 8px 16px;
+      }
     }
   </style>
 </head>
 <body>
 
+<div class="container">
   <h1>SSC Exam Countdown</h1>
-  <button onclick="toggleDarkMode()" id="toggleBtn">Toggle Dark Mode</button>
-
   <table>
     <thead>
       <tr>
@@ -125,46 +147,54 @@
     </tbody>
   </table>
 
-  <script>
-    // Load saved dark mode
-    if (localStorage.getItem("darkMode") === "true") {
-      document.body.classList.add("dark-mode");
-    }
+  <div class="bottom-button">
+    <button onclick="toggleDarkMode()" id="toggleBtn">Toggle Dark Mode</button>
+  </div>
+</div>
 
-    function toggleDarkMode() {
-      document.body.classList.toggle("dark-mode");
-      localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
-    }
+<script>
+  // Countdown logic
+  function countdownTimer(id, dateStr) {
+    const targetDate = new Date(dateStr).getTime();
+    const update = () => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
 
-    function countdownTimer(id, dateStr) {
-      const targetDate = new Date(dateStr).getTime();
-      const update = () => {
-        const now = new Date().getTime();
-        const distance = targetDate - now;
+      if (distance <= 0) {
+        document.getElementById(id).innerHTML = "Started / Over";
+        return;
+      }
 
-        if (distance <= 0) {
-          document.getElementById(id).innerHTML = "Started / Over";
-          return;
-        }
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      document.getElementById(id).innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    };
 
-        document.getElementById(id).innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-      };
+    update();
+    setInterval(update, 1000);
+  }
 
-      update();
-      setInterval(update, 1000);
-    }
+  // Dark mode toggle
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+    localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+  }
 
-    countdownTimer("countdown1", "August 13, 2025 00:00:00");
-    countdownTimer("countdown2", "September 8, 2025 00:00:00");
-    countdownTimer("countdown3", "September 1, 2025 00:00:00");
-    countdownTimer("countdown4", "November 1, 2025 00:00:00");
-    countdownTimer("countdown5", "January 1, 2026 00:00:00");
-  </script>
+  // Remember dark mode
+  if (localStorage.getItem("darkMode") === "true") {
+    document.body.classList.add("dark-mode");
+  }
+
+  // Start countdowns
+  countdownTimer("countdown1", "August 13, 2025 00:00:00");
+  countdownTimer("countdown2", "September 8, 2025 00:00:00");
+  countdownTimer("countdown3", "September 1, 2025 00:00:00");
+  countdownTimer("countdown4", "November 1, 2025 00:00:00");
+  countdownTimer("countdown5", "January 1, 2026 00:00:00");
+</script>
 
 </body>
 </html>
