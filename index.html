@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Upcoming Bank Exams Countdown</title>
+  <title>Upcoming SSC Exams Countdown</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -53,19 +53,19 @@
     }
 
     .badge {
-      background: linear-gradient(to right, #007acc, #00bcd4); /* Darker blue gradient */
+      background: linear-gradient(to right, #007acc, #00bcd4);
       color: white;
       border-radius: 20px;
       padding: 8px 14px;
       display: inline-block;
       font-weight: bold;
-      font-size: 0.95em; /* Reduced size */
+      font-size: 0.95em;
       min-width: 120px;
     }
   </style>
 </head>
 <body>
-  <h1>Upcoming Bank Exams Countdown</h1>
+  <h1>Upcoming SSC Exams Countdown</h1>
 
   <div class="table">
     <div class="table-header">
@@ -74,59 +74,41 @@
       <div class="cell">TIME LEFT</div>
     </div>
 
-    <!-- Exam Rows -->
+    <!-- SSC Exam Rows -->
     <div class="table-row">
-      <div class="cell">RRB PO Prelims</div>
-      <div class="cell">27 July 2025</div>
-      <div class="cell"><span class="badge" id="rrbPoPrelims"></span></div>
+      <div class="cell">SSC CGL Tier-1</div>
+      <div class="cell">13 August 2025</div>
+      <div class="cell"><span class="badge" id="sscCglTier1"></span></div>
     </div>
     <div class="table-row">
-      <div class="cell">RRB PO Mains</div>
-      <div class="cell">13 September 2025</div>
-      <div class="cell"><span class="badge" id="rrbPoMains"></span></div>
+      <div class="cell">SSC CHSL Tier-1</div>
+      <div class="cell">08 September 2025</div>
+      <div class="cell"><span class="badge" id="sscChslTier1"></span></div>
     </div>
     <div class="table-row">
-      <div class="cell">RRB Clerk Prelims</div>
-      <div class="cell">30 August 2025</div>
-      <div class="cell"><span class="badge" id="rrbClerkPrelims"></span></div>
+      <div class="cell">SSC CPO Tier-1</div>
+      <div class="cell">01 September 2025</div>
+      <div class="cell"><span class="badge" id="sscCpoTier1"></span></div>
     </div>
     <div class="table-row">
-      <div class="cell">RRB Clerk Mains</div>
-      <div class="cell">09 November 2025</div>
-      <div class="cell"><span class="badge" id="rrbClerkMains"></span></div>
+      <div class="cell">DP CONSTABLE</div>
+      <div class="cell">01 November 2025</div>
+      <div class="cell"><span class="badge" id="dpConstable"></span></div>
     </div>
     <div class="table-row">
-      <div class="cell">IBPS PO Prelims</div>
-      <div class="cell">04 October 2025</div>
-      <div class="cell"><span class="badge" id="ibpsPoPrelims"></span></div>
-    </div>
-    <div class="table-row">
-      <div class="cell">IBPS PO Mains</div>
-      <div class="cell">29 November 2025</div>
-      <div class="cell"><span class="badge" id="ibpsPoMains"></span></div>
-    </div>
-    <div class="table-row">
-      <div class="cell">IBPS Clerk Prelims</div>
-      <div class="cell">06 December 2025</div>
-      <div class="cell"><span class="badge" id="ibpsClerkPrelims"></span></div>
-    </div>
-    <div class="table-row">
-      <div class="cell">IBPS Clerk Mains</div>
-      <div class="cell">01 February 2026</div>
-      <div class="cell"><span class="badge" id="ibpsClerkMains"></span></div>
+      <div class="cell">SSC GD</div>
+      <div class="cell">01 January 2026</div>
+      <div class="cell"><span class="badge" id="sscGd"></span></div>
     </div>
   </div>
 
   <script>
     const exams = {
-      rrbPoPrelims: "2025-07-27T00:00:00",
-      rrbPoMains: "2025-09-13T00:00:00",
-      rrbClerkPrelims: "2025-08-30T00:00:00",
-      rrbClerkMains: "2025-11-09T00:00:00",
-      ibpsPoPrelims: "2025-10-04T00:00:00",
-      ibpsPoMains: "2025-11-29T00:00:00",
-      ibpsClerkPrelims: "2025-12-06T00:00:00",
-      ibpsClerkMains: "2026-02-01T00:00:00"
+      sscCglTier1: "2025-08-13T00:00:00",
+      sscChslTier1: "2025-09-08T00:00:00",
+      sscCpoTier1: "2025-09-01T00:00:00",
+      dpConstable: "2025-11-01T00:00:00",
+      sscGd: "2026-01-01T00:00:00"
     };
 
     function updateCountdowns() {
