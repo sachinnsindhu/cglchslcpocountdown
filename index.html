@@ -1,261 +1,370 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Upcoming SSC Exams Countdown</title>
-  <style>
-    :root {
-      --bg-color: #0f172a;
-      --text-color: #ffffff;
-      --header-bg: linear-gradient(to right, #073763, #005a9e);
-      --row-bg: #1e293b;
-      --border-color: #334155;
-      --badge-bg: linear-gradient(to right, #007acc, #00bcd4);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Countdown timer for upcoming bank exams by Future Bankers by Tanu Garg, including RRB PO, RRB Clerk, IBPS PO, and IBPS Clerk.">
+    <meta name="keywords" content="bank exams, countdown timer, RRB PO, IBPS PO, exam dates, Future Bankers, Tanu Garg">
+    <meta name="author" content="Tanu Garg">
+    <meta property="og:title" content="Bank Exam Dates Countdown - Future Bankers">
+    <meta property="og:description" content="Track upcoming bank exam dates with our countdown timer by Future Bankers by Tanu Garg.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourwebsite.com">
+    <meta property="og:image" content="https://yourwebsite.com/og-image.jpg">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" as="style" onload="this.rel='stylesheet'">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
+    <title>Bank Exam Countdown - Future Bankers</title>
+    <style>
+        body {
+            font-family: 'Roboto', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f2f8ff, #e0e7ff);
+            color: #333;
+            text-align: center;
+            padding: 40px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      transition: background-color 0.3s, color 0.3s;
-    }
+        h1 {
+            color: #0645AD;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
 
-    h1 {
-      text-align: center;
-      padding: 30px 20px;
-      font-size: 2em;
-    }
+        table {
+            margin: 30px auto;
+            border-collapse: collapse;
+            width: 90%;
+            max-width: 800px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
 
-    .table {
-      max-width: 900px;
-      margin: 0 auto;
-      border-collapse: collapse;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
-    }
+        th, td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            font-size: 1.1rem;
+        }
 
-    .table-header {
-      display: flex;
-      justify-content: space-between;
-      background: var(--header-bg);
-      font-weight: bold;
-      padding: 16px 24px;
-      font-size: 1.1em;
-    }
+        th {
+            background: linear-gradient(45deg, #0645AD, #0a6dd6);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
 
-    .cell {
-      flex: 1;
-      text-align: center;
-    }
+        tr {
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
 
-    .table-row {
-      background-color: var(--row-bg);
-      border-bottom: 1px solid var(--border-color);
-      padding: 16px 24px;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
+        tr:hover {
+            background-color: #f0f4ff;
+            transform: translateY(-2px);
+        }
 
-    .row-label {
-      display: none;
-      font-weight: bold;
-      margin-bottom: 5px;
-      color: #aaa;
-    }
+        .countdown {
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(45deg, #007BFF, #00c4b4);
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 120px;
+            animation: fadeIn 0.5s ease-in;
+        }
 
-    .row-item {
-      flex: 1;
-      text-align: center;
-      padding: 10px 0;
-    }
+        .countdown span {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 0.9em;
+        }
 
-    .badge {
-      background: var(--badge-bg);
-      color: white;
-      border-radius: 20px;
-      padding: 8px 14px;
-      display: inline-block;
-      font-weight: bold;
-      font-size: 0.95em;
-      min-width: 120px;
-    }
+        .countdown.exam-day {
+            background: #28a745;
+        }
 
-    .toggle-container {
-      text-align: center;
-      padding: 30px 0;
-    }
+        .countdown.completed {
+            background: #dc3545;
+        }
 
-    .toggle-button {
-      background: #ffffff;
-      color: #000000;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 20px;
-      font-size: 1em;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s, color 0.3s;
-    }
+        .footer {
+            margin-top: 40px;
+            font-size: 1rem;
+            color: #555;
+        }
 
-    body.light-mode {
-      --bg-color: #f4f4f4;
-      --text-color: #000000;
-      --header-bg: linear-gradient(to right, #cce6ff, #99ccff);
-      --row-bg: #ffffff;
-      --border-color: #cccccc;
-      --badge-bg: linear-gradient(to right, #3399ff, #66ccff);
-    }
+        .footer strong {
+            color: #0645AD;
+        }
 
-    body.light-mode .toggle-button {
-      background: #000000;
-      color: #ffffff;
-    }
+        .links {
+            margin-top: 10px;
+        }
 
-    /* Fully responsive for mobile */
-    @media (max-width: 600px) {
-      .table-header {
-        display: none;
-      }
+        .links a {
+            display: inline-block;
+            margin: 8px 12px;
+            text-decoration: none;
+            color: #0645AD;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
 
-      .table-row {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 16px;
-      }
+        .links a:hover {
+            color: #0a6dd6;
+        }
 
-      .row-item {
-        text-align: left;
-        width: 100%;
-        padding: 6px 0;
-      }
+        .dark-mode-toggle {
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 1rem;
+            background: #6c757d;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
 
-      .row-label {
-        display: inline-block;
-        margin-right: 8px;
-        font-weight: bold;
-      }
-    }
-  </style>
+        .dark-mode-toggle:hover {
+            background: #5a6268;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 1rem;
+            margin: 20px auto;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: #ecf0f1;
+        }
+
+        body.dark-mode h1,
+        body.dark-mode .footer,
+        body.dark-mode .footer strong {
+            color: #3498db;
+        }
+
+        body.dark-mode table {
+            background: #34495e;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode th {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+        }
+
+        body.dark-mode td {
+            border-bottom: 1px solid #4a6278;
+        }
+
+        body.dark-mode tr:hover {
+            background: #3e5a74;
+        }
+
+        body.dark-mode .countdown {
+            background: linear-gradient(45deg, #3498db, #1abc9c);
+        }
+
+        body.dark-mode .countdown.exam-day {
+            background: #27ae60;
+        }
+
+        body.dark-mode .countdown.completed {
+            background: #c0392b;
+        }
+
+        body.dark-mode .countdown span {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode .links a {
+            color: #3498db;
+        }
+
+        body.dark-mode .links a:hover {
+            color: #1abc9c;
+        }
+
+        body.dark-mode .dark-mode-toggle {
+            background: #3498db;
+        }
+
+        body.dark-mode .dark-mode-toggle:hover {
+            background: #2980b9;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            table {
+                width: 100%;
+            }
+            th, td {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+            .countdown {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+                min-width: 100px;
+                gap: 5px;
+            }
+            .countdown span {
+                padding: 3px 6px;
+                font-size: 0.7em;
+            }
+            .footer {
+                font-size: 0.9rem;
+            }
+            .links a {
+                margin: 5px 8px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Upcoming SSC Exams Countdown</h1>
+    <h1>Upcoming SSC Exams Countdown</h1>
+    <table role="grid" aria-label="SSC exam countdown table">
+        <thead>
+            <tr>
+                <th scope="col">Exam</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time Left</th>
+            </tr>
+        </thead>
+        <tbody id="countdown-table"></tbody>
+    </table>
 
-  <div class="table">
-    <div class="table-header">
-      <div class="cell">EXAM</div>
-      <div class="cell">DATE</div>
-      <div class="cell">TIME LEFT</div>
+    <div id="error-message" class="error-message" style="display: none;">
+        Unable to load exam data. Please try refreshing the page or contact support.
     </div>
 
-    <!-- Repeat structure for each exam row -->
-    <div class="table-row">
-      <div class="row-item">
-        <span class="row-label">Exam:</span> SSC CGL Tier-1
-      </div>
-      <div class="row-item">
-        <span class="row-label">Date:</span> 13 August 2025
-      </div>
-      <div class="row-item">
-        <span class="row-label">Time Left:</span>
-        <span class="badge" id="sscCglTier1" aria-live="polite"></span>
-      </div>
+    <button onclick="toggleDarkMode()" class="dark-mode-toggle">Toggle Dark Mode</button>
+
+    <div class="footer">
+        Provided by <strong>Future Bankers – Tanu Garg</strong>
+        <div class="links">
+            <a href="https://linktr.ee/tanugarg01" target="_blank" rel="noopener" aria-label="Linktree for all social media accounts">LinkTree</a> |
+            <a href="https://t.me/tanugarg01" target="_blank" rel="noopener" aria-label="Future Bankers Telegram channel">Telegram</a> |
+            <a href="https://youtube.com/@futurebankers01" target="_blank" rel="noopener" aria-label="Future Bankers YouTube channel">YouTube</a> |
+            <a href="https://www.instagram.com/tanugarg01" target="_blank" rel="noopener" aria-label="Tanu Garg Instagram">Instagram</a> |
+            <a href="https://www.instagram.com/tanugarrgg01" target="_blank" rel="noopener" aria-label="Banking Instagram">Banking Instagram</a>
+        </div>
     </div>
 
-    <div class="table-row">
-      <div class="row-item">
-        <span class="row-label">Exam:</span> SSC CHSL Tier-1
-      </div>
-      <div class="row-item">
-        <span class="row-label">Date:</span> 08 September 2025
-      </div>
-      <div class="row-item">
-        <span class="row-label">Time Left:</span>
-        <span class="badge" id="sscChslTier1" aria-live="polite"></span>
-      </div>
-    </div>
+    <noscript>
+        <p style="color: #dc3545; text-align: center; margin-top: 20px;">
+            JavaScript is required to view the countdown. Please enable JavaScript or check the exam dates manually.
+        </p>
+    </noscript>
 
-    <div class="table-row">
-      <div class="row-item">
-        <span class="row-label">Exam:</span> SSC CPO Tier-1
-      </div>
-      <div class="row-item">
-        <span class="row-label">Date:</span> 01 September 2025
-      </div>
-      <div class="row-item">
-        <span class="row-label">Time Left:</span>
-        <span class="badge" id="sscCpoTier1" aria-live="polite"></span>
-      </div>
-    </div>
+    <script>
+        const exams = [
+            { name: "SSC CGL Tier-1", date: "2025-08-13" },
+            { name: "SSC CHSL Tier-1", date: "2025-09-08" },
+            { name: "SSC CPO Tier-1", date: "2025-09-01" },
+            { name: "DP CONSTABLE", date: "2025-11-01" },
+            { name: "SSC GD", date: "2026-01-01" }
+        ];
 
-    <div class="table-row">
-      <div class="row-item">
-        <span class="row-label">Exam:</span> DP CONSTABLE
-      </div>
-      <div class="row-item">
-        <span class="row-label">Date:</span> 01 November 2025
-      </div>
-      <div class="row-item">
-        <span class="row-label">Time Left:</span>
-        <span class="badge" id="dpConstable" aria-live="polite"></span>
-      </div>
-    </div>
+        const tableBody = document.getElementById("countdown-table");
+        const errorMessage = document.getElementById("error-message");
 
-    <div class="table-row">
-      <div class="row-item">
-        <span class="row-label">Exam:</span> SSC GD
-      </div>
-      <div class="row-item">
-        <span class="row-label">Date:</span> 01 January 2026
-      </div>
-      <div class="row-item">
-        <span class="row-label">Time Left:</span>
-        <span class="badge" id="sscGd" aria-live="polite"></span>
-      </div>
-    </div>
-  </div>
+        function updateCountdown() {
+            try {
+                tableBody.innerHTML = ""; // Clear existing rows
+                const today = new Date();
+                const timeZoneOffset = today.getTimezoneOffset();
+                console.log(`Current local time: ${today.toLocaleString("en-IN", { timeZoneName: "long" })}`);
+                console.log(`Time zone offset: ${-timeZoneOffset / 60} hours from UTC (negative means ahead of UTC)`);
 
-  <div class="toggle-container">
-    <button class="toggle-button" onclick="toggleMode()">Toggle Dark/Light Mode</button>
-  </div>
+                if (!exams || exams.length === 0) {
+                    throw new Error("No exam data available.");
+                }
 
-  <script>
-    const exams = {
-      sscCglTier1: "2025-08-13T00:00:00",
-      sscChslTier1: "2025-09-08T00:00:00",
-      sscCpoTier1: "2025-09-01T00:00:00",
-      dpConstable: "2025-11-01T00:00:00",
-      sscGd: "2026-01-01T00:00:00"
-    };
+                exams.forEach(exam => {
+                    // Explicitly set exam date to midnight in local time zone
+                    const examDate = new Date(exam.date + "T00:00:00");
+                    if (isNaN(examDate.getTime())) {
+                        console.error(`Invalid date for exam: ${exam.name}`);
+                        return;
+                    }
 
-    function updateCountdowns() {
-      const now = new Date().getTime();
+                    const diffTime = examDate.getTime() - today.getTime();
+                    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+                    const diffHours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const diffMinutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
 
-      for (const id in exams) {
-        const examDate = new Date(exams[id]).getTime();
-        const diff = examDate - now;
+                    let countdownText = "";
+                    let countdownClass = "";
 
-        if (diff > 0) {
-          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-          const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-          const minutes = Math.floor((diff / (1000 * 60)) % 60);
-          const seconds = Math.floor((diff / 1000) % 60);
+                    if (diffTime > 0) {
+                        countdownText = `<span>${diffDays} days</span> <span>${diffHours}h</span> <span>${diffMinutes}m</span>`;
+                        countdownClass = "";
+                    } else if (diffTime > -86400000) {
+                        countdownText = "Exam Day!";
+                        countdownClass = "exam-day";
+                    } else {
+                        countdownText = "Completed";
+                        countdownClass = "completed";
+                    }
 
-          document.getElementById(id).textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-        } else {
-          document.getElementById(id).textContent = "Started";
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${exam.name}</td>
+                        <td>${examDate.toLocaleDateString("en-IN", { day: '2-digit', month: 'long', year: 'numeric' })}</td>
+                        <td><span class="countdown ${countdownClass}">${countdownText}</span></td>
+                    `;
+                    tableBody.appendChild(row);
+
+                    console.log(`Added row for ${exam.name}: ${countdownText} (Exam Date: ${examDate.toLocaleString("en-IN", { timeZoneName: "long" })})`);
+                });
+
+                if (tableBody.children.length === 0) {
+                    throw new Error("No rows were added to the table.");
+                }
+
+                errorMessage.style.display = "none";
+            } catch (error) {
+                console.error("Error updating countdown:", error);
+                errorMessage.style.display = "block";
+                errorMessage.textContent = "Unable to load exam data. Please try refreshing the page or contact support.";
+            }
         }
-      }
-    }
 
-    function toggleMode() {
-      document.body.classList.toggle('light-mode');
-    }
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
 
-    setInterval(updateCountdowns, 1000);
-    updateCountdowns();
-  </script>
+        // Initial update
+        updateCountdown();
+
+        // Update every minute to reflect minutes changing
+        setInterval(updateCountdown, 1000 * 60);
+    </script>
 </body>
 </html>
