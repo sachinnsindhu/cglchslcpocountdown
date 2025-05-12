@@ -20,6 +20,9 @@
       padding: 0;
       background-color: var(--bg-color);
       color: var(--text-color);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
       transition: background-color 0.3s, color 0.3s;
     }
 
@@ -40,25 +43,24 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 24px;
     }
 
     .table-header {
       background: var(--header-bg);
       font-weight: bold;
+      padding: 16px 24px;
       font-size: 1.1em;
     }
 
     .table-row {
       background-color: var(--row-bg);
+      padding: 14px 24px;
       border-bottom: 1px solid var(--border-color);
-      flex-wrap: wrap;
     }
 
     .cell {
       flex: 1;
       text-align: center;
-      padding: 5px 0;
     }
 
     .badge {
@@ -93,34 +95,15 @@
       --bg-color: #f4f4f4;
       --text-color: #000000;
       --header-bg: linear-gradient(to right, #cce6ff, #99ccff);
-      --row-bg: #ffffff;
+      --row-bg: rgba(255, 255, 255, 0.8);
       --border-color: #cccccc;
       --badge-bg: linear-gradient(to right, #3399ff, #66ccff);
+      background-image: url('/mnt/data/e0b444bc-3beb-413b-8803-8a0731d55ca8.png');
     }
 
     body.light-mode .toggle-button {
       background: #000000;
       color: #ffffff;
-    }
-
-    /* Mobile responsiveness */
-    @media (max-width: 600px) {
-      .table-header, .table-row {
-        flex-direction: column;
-        align-items: flex-start;
-        text-align: left;
-        padding: 12px 16px;
-      }
-
-      .cell {
-        width: 100%;
-        text-align: left;
-        padding: 4px 0;
-      }
-
-      .badge {
-        margin-top: 6px;
-      }
     }
   </style>
 </head>
@@ -137,32 +120,32 @@
     <div class="table-row">
       <div class="cell">SSC CGL Tier-1</div>
       <div class="cell">13 August 2025</div>
-      <div class="cell"><span class="badge" id="sscCglTier1" aria-live="polite"></span></div>
+      <div class="cell"><span class="badge" id="sscCglTier1"></span></div>
     </div>
     <div class="table-row">
       <div class="cell">SSC CHSL Tier-1</div>
       <div class="cell">08 September 2025</div>
-      <div class="cell"><span class="badge" id="sscChslTier1" aria-live="polite"></span></div>
+      <div class="cell"><span class="badge" id="sscChslTier1"></span></div>
     </div>
     <div class="table-row">
       <div class="cell">SSC CPO Tier-1</div>
       <div class="cell">01 September 2025</div>
-      <div class="cell"><span class="badge" id="sscCpoTier1" aria-live="polite"></span></div>
+      <div class="cell"><span class="badge" id="sscCpoTier1"></span></div>
     </div>
     <div class="table-row">
       <div class="cell">DP CONSTABLE</div>
       <div class="cell">01 November 2025</div>
-      <div class="cell"><span class="badge" id="dpConstable" aria-live="polite"></span></div>
+      <div class="cell"><span class="badge" id="dpConstable"></span></div>
     </div>
     <div class="table-row">
       <div class="cell">SSC GD</div>
       <div class="cell">01 January 2026</div>
-      <div class="cell"><span class="badge" id="sscGd" aria-live="polite"></span></div>
+      <div class="cell"><span class="badge" id="sscGd"></span></div>
     </div>
   </div>
 
   <div class="toggle-container">
-    <button class="toggle-button" onclick="toggleMode()">Toggle Dark/Light Mode</button>
+    <button class="toggle-button" onclick="toggleMode()">Dark Mode</button>
   </div>
 
   <script>
@@ -203,3 +186,31 @@
   </script>
 </body>
 </html>
+@media (max-width: 600px) {
+  .table-header, .table-row {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 16px;
+  }
+
+  .cell {
+    width: 100%;
+    text-align: left;
+    padding: 6px 0;
+    font-size: 1em;
+  }
+
+  .badge {
+    margin-top: 5px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+    padding: 20px 10px;
+  }
+
+  .toggle-button {
+    padding: 8px 16px;
+    font-size: 0.95em;
+  }
+}
