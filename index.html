@@ -8,10 +8,9 @@
     :root {
       --bg-color: #0f172a;
       --text-color: #ffffff;
-      --header-bg: linear-gradient(to right, #073763, #005a9e);
-      --row-bg: #1e293b;
-      --border-color: #334155;
+      --card-bg: #1e293b;
       --badge-bg: linear-gradient(to right, #007acc, #00bcd4);
+      --header-color: #ffffff;
     }
 
     body {
@@ -27,60 +26,46 @@
       text-align: center;
       padding: 30px 20px;
       font-size: 2em;
+      color: var(--header-color);
     }
 
-    .table {
-      max-width: 900px;
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
       margin: 0 auto;
-      border-collapse: collapse;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      padding: 20px;
     }
 
-    .table-header {
-      display: flex;
-      justify-content: space-between;
-      background: var(--header-bg);
-      font-weight: bold;
-      padding: 16px 24px;
-      font-size: 1.1em;
-    }
-
-    .cell {
-      flex: 1;
+    .exam-card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
       text-align: center;
     }
 
-    .table-row {
-      background-color: var(--row-bg);
-      border-bottom: 1px solid var(--border-color);
-      padding: 16px 24px;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-
-    .row-label {
-      display: none;
+    .exam-title {
+      font-size: 1.2em;
       font-weight: bold;
-      margin-bottom: 5px;
-      color: #aaa;
+      margin-bottom: 10px;
     }
 
-    .row-item {
-      flex: 1;
-      text-align: center;
-      padding: 10px 0;
+    .exam-date {
+      color: #bbb;
+      margin-bottom: 12px;
+      font-size: 0.95em;
     }
 
     .badge {
       background: var(--badge-bg);
       color: white;
       border-radius: 20px;
-      padding: 8px 14px;
+      padding: 10px 16px;
       display: inline-block;
       font-weight: bold;
-      font-size: 0.95em;
-      min-width: 120px;
+      font-size: 1em;
     }
 
     .toggle-container {
@@ -103,117 +88,49 @@
     body.light-mode {
       --bg-color: #f4f4f4;
       --text-color: #000000;
-      --header-bg: linear-gradient(to right, #cce6ff, #99ccff);
-      --row-bg: #ffffff;
-      --border-color: #cccccc;
+      --card-bg: #ffffff;
       --badge-bg: linear-gradient(to right, #3399ff, #66ccff);
+      --header-color: #000000;
     }
 
     body.light-mode .toggle-button {
       background: #000000;
       color: #ffffff;
     }
-
-    /* Fully responsive for mobile */
-    @media (max-width: 600px) {
-      .table-header {
-        display: none;
-      }
-
-      .table-row {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 16px;
-      }
-
-      .row-item {
-        text-align: left;
-        width: 100%;
-        padding: 6px 0;
-      }
-
-      .row-label {
-        display: inline-block;
-        margin-right: 8px;
-        font-weight: bold;
-      }
-    }
   </style>
 </head>
 <body>
   <h1>Upcoming SSC Exams Countdown</h1>
 
-  <div class="table">
-    <div class="table-header">
-      <div class="cell">EXAM</div>
-      <div class="cell">DATE</div>
-      <div class="cell">TIME LEFT</div>
+  <div class="cards-container">
+    <div class="exam-card">
+      <div class="exam-title">SSC CGL Tier-1</div>
+      <div class="exam-date">13 August 2025</div>
+      <div class="badge" id="sscCglTier1"></div>
     </div>
 
-    <!-- Repeat structure for each exam row -->
-    <div class="table-row">
-      <div class="row-item">
-        <span class="row-label">Exam:</span> SSC CGL Tier-1
-      </div>
-      <div class="row-item">
-        <span class="row-label">Date:</span> 13 August 2025
-      </div>
-      <div class="row-item">
-        <span class="row-label">Time Left:</span>
-        <span class="badge" id="sscCglTier1" aria-live="polite"></span>
-      </div>
+    <div class="exam-card">
+      <div class="exam-title">SSC CHSL Tier-1</div>
+      <div class="exam-date">08 September 2025</div>
+      <div class="badge" id="sscChslTier1"></div>
     </div>
 
-    <div class="table-row">
-      <div class="row-item">
-        <span class="row-label">Exam:</span> SSC CHSL Tier-1
-      </div>
-      <div class="row-item">
-        <span class="row-label">Date:</span> 08 September 2025
-      </div>
-      <div class="row-item">
-        <span class="row-label">Time Left:</span>
-        <span class="badge" id="sscChslTier1" aria-live="polite"></span>
-      </div>
+    <div class="exam-card">
+      <div class="exam-title">SSC CPO Tier-1</div>
+      <div class="exam-date">01 September 2025</div>
+      <div class="badge" id="sscCpoTier1"></div>
     </div>
 
-    <div class="table-row">
-      <div class="row-item">
-        <span class="row-label">Exam:</span> SSC CPO Tier-1
-      </div>
-      <div class="row-item">
-        <span class="row-label">Date:</span> 01 September 2025
-      </div>
-      <div class="row-item">
-        <span class="row-label">Time Left:</span>
-        <span class="badge" id="sscCpoTier1" aria-live="polite"></span>
-      </div>
+    <div class="exam-card">
+      <div class="exam-title">DP CONSTABLE</div>
+      <div class="exam-date">01 November 2025</div>
+      <div class="badge" id="dpConstable"></div>
     </div>
 
-    <div class="table-row">
-      <div class="row-item">
-        <span class="row-label">Exam:</span> DP CONSTABLE
-      </div>
-      <div class="row-item">
-        <span class="row-label">Date:</span> 01 November 2025
-      </div>
-      <div class="row-item">
-        <span class="row-label">Time Left:</span>
-        <span class="badge" id="dpConstable" aria-live="polite"></span>
-      </div>
-    </div>
-
-    <div class="table-row">
-      <div class="row-item">
-        <span class="row-label">Exam:</span> SSC GD
-      </div>
-      <div class="row-item">
-        <span class="row-label">Date:</span> 01 January 2026
-      </div>
-      <div class="row-item">
-        <span class="row-label">Time Left:</span>
-        <span class="badge" id="sscGd" aria-live="polite"></span>
-      </div>
+    <div class="exam-card">
+      <div class="exam-title">SSC GD</div>
+      <div class="exam-date">01 January 2026</div>
+      <div class="badge" id="sscGd"></div>
     </div>
   </div>
 
