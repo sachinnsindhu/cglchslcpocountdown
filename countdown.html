@@ -70,7 +70,10 @@
         let message = "";
         if (diff > 0) {
           const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-          message = `${days} days left`;
+          const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+          message = `${days}d ${hours}h ${minutes}m ${seconds}s left`;
         } else {
           message = "Exam is ongoing or has passed";
         }
@@ -90,7 +93,7 @@
     setInterval(updateClock, 1000);
     updateClock();
     updateCountdowns();
-    setInterval(updateCountdowns, 60 * 60 * 1000); // update every hour
+    setInterval(updateCountdowns, 1000); // changed to update every second
 
     function enableNotifications() {
       if (!("Notification" in window)) {
