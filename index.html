@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SSC Exam Countdown</title>
   <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" as="style" onload="this.rel='stylesheet'" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     body {
@@ -13,21 +12,20 @@
       background: linear-gradient(135deg, #f2f8ff, #e0e7ff);
       color: #333;
       text-align: center;
-      padding: 20px;
       margin: 0;
+      padding: 20px;
     }
 
     h1 {
       color: #0645AD;
       font-size: 2.5rem;
-      margin-bottom: 10px;
+      margin-bottom: 25px; /* space between heading and table */
     }
 
     .table-wrapper {
       display: flex;
       justify-content: center;
       width: 100%;
-      margin-top: 10px;
     }
 
     table {
@@ -55,8 +53,6 @@
 
     tr:hover {
       background-color: #f0f4ff;
-      transform: translateY(-2px);
-      transition: background 0.3s ease, transform 0.2s ease;
     }
 
     .countdown {
@@ -69,7 +65,6 @@
       align-items: center;
       gap: 8px;
       min-width: 140px;
-      animation: fadeIn 0.5s ease-in;
     }
 
     .countdown span {
@@ -107,7 +102,6 @@
       font-size: 1rem;
       margin: 20px auto;
       max-width: 800px;
-      text-align: center;
     }
 
     body.dark-mode {
@@ -138,11 +132,6 @@
 
     body.dark-mode .countdown.completed {
       background: #c0392b;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
     }
 
     @media (max-width: 600px) {
@@ -254,7 +243,7 @@
     }
 
     updateCountdown();
-    setInterval(updateCountdown, 1000); // still updates every second
+    setInterval(updateCountdown, 1000); // updates every second
   </script>
 </body>
 </html>
