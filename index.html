@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SSC Exam Countdown</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Roboto', 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #f2f8ff, #e0e7ff);
       color: #333;
       text-align: center;
@@ -18,7 +19,7 @@
     h1 {
       color: #0645AD;
       font-size: 2.5rem;
-      margin-bottom: 60px; /* Increased gap */
+      margin-bottom: 25px; /* space between heading and table */
     }
 
     .table-wrapper {
@@ -41,7 +42,6 @@
       padding: 15px;
       border-bottom: 1px solid #ddd;
       font-size: 1.1rem;
-      vertical-align: middle;
     }
 
     th {
@@ -82,13 +82,56 @@
       background: #dc3545;
     }
 
-    .date-box {
-      display: inline-block;
-      line-height: 1.2;
+    .dark-mode-toggle {
+      margin: 30px auto;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background: #6c757d;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
     }
 
-    .date-box span {
-      display: block;
+    .dark-mode-toggle:hover {
+      background: #5a6268;
+    }
+
+    .error-message {
+      color: #dc3545;
+      font-size: 1rem;
+      margin: 20px auto;
+      max-width: 800px;
+    }
+
+    body.dark-mode {
+      background: linear-gradient(135deg, #2c3e50, #34495e);
+      color: #ecf0f1;
+    }
+
+    body.dark-mode table {
+      background: #34495e;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    body.dark-mode th {
+      background: linear-gradient(45deg, #3498db, #2980b9);
+    }
+
+    body.dark-mode tr:hover {
+      background: #3e5a74;
+    }
+
+    body.dark-mode .countdown {
+      background: linear-gradient(45deg, #3498db, #1abc9c);
+    }
+
+    body.dark-mode .countdown.exam-day {
+      background: #27ae60;
+    }
+
+    body.dark-mode .countdown.completed {
+      background: #c0392b;
     }
 
     @media (max-width: 600px) {
@@ -135,6 +178,12 @@
     </table>
   </div>
 
+  <div id="error-message" class="error-message" style="display: none;">
+    Unable to load exam data. Please try refreshing the page or contact support.
+  </div>
+
+  <button onclick="toggleDarkMode()" class="dark-mode-toggle">Toggle Dark Mode</button>
+
   <script>
     const exams = [
       { name: "SSC CGL Tier-1", date: "2025-08-13" },
@@ -145,51 +194,56 @@
     ];
 
     const tableBody = document.getElementById("countdown-table");
-
-    function formatDateThreeLines(dateObj) {
-      const day = dateObj.getDate();
-      const month = dateObj.toLocaleString("default", { month: "long" });
-      const year = dateObj.getFullYear();
-      return `<div class="date-box"><span>${day}</span><span>${month}</span><span>${year}</span></div>`;
-    }
+    const errorMessage = document.getElementById("error-message");
 
     function updateCountdown() {
-      tableBody.innerHTML = "";
-      const now = new Date();
+      try {
+        tableBody.innerHTML = "";
+        const now = new Date();
 
-      exams.forEach(exam => {
-        const examDate = new Date(exam.date + "T00:00:00");
-        const diffTime = examDate.getTime() - now.getTime();
+        exams.forEach(exam => {
+          const examDate = new Date(exam.date + "T00:00:00");
+          const diffTime = examDate.getTime() - now.getTime();
 
-        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-        const diffHours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const diffMinutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+          const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+          const diffHours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const diffMinutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
 
-        let countdownText = "";
-        let countdownClass = "";
+          let countdownText = "";
+          let countdownClass = "";
 
-        if (diffTime > 0) {
-          countdownText = `<span>${diffDays}d</span> <span>${diffHours}h</span> <span>${diffMinutes}m</span>`;
-        } else if (diffTime > -86400000) {
-          countdownText = "Exam Day!";
-          countdownClass = "exam-day";
-        } else {
-          countdownText = "Completed";
-          countdownClass = "completed";
-        }
+          if (diffTime > 0) {
+            countdownText = `<span>${diffDays}d</span> <span>${diffHours}h</span> <span>${diffMinutes}m</span>`;
+          } else if (diffTime > -86400000) {
+            countdownText = "Exam Day!";
+            countdownClass = "exam-day";
+          } else {
+            countdownText = "Completed";
+            countdownClass = "completed";
+          }
 
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${exam.name}</td>
-          <td>${formatDateThreeLines(examDate)}</td>
-          <td><span class="countdown ${countdownClass}">${countdownText}</span></td>
-        `;
-        tableBody.appendChild(row);
-      });
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${exam.name}</td>
+            <td>${examDate.toLocaleDateString("en-IN", { day: '2-digit', month: 'long', year: 'numeric' })}</td>
+            <td><span class="countdown ${countdownClass}">${countdownText}</span></td>
+          `;
+          tableBody.appendChild(row);
+        });
+
+        errorMessage.style.display = "none";
+      } catch (error) {
+        console.error("Error updating countdown:", error);
+        errorMessage.style.display = "block";
+      }
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
     }
 
     updateCountdown();
-    setInterval(updateCountdown, 1000);
+    setInterval(updateCountdown, 1000); // updates every second
   </script>
 </body>
 </html>
