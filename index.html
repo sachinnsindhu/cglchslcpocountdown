@@ -1,41 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:title" content="SSC Exam Dates Countdown">
-  <meta property="og:description" content="Track upcoming SSC exam dates with our countdown timer.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://yourwebsite.com">
-  <meta property="og:image" content="https://yourwebsite.com/og-image.jpg">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" as="style" onload="this.rel='stylesheet'">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SSC Exam Countdown</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" as="style" onload="this.rel='stylesheet'" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Roboto', 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #f2f8ff, #e0e7ff);
       color: #333;
       text-align: center;
-      padding: 40px;
+      padding: 20px;
       margin: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .table-wrapper {
-      display: flex;
-      justify-content: center;
-      width: 100%;
     }
 
     h1 {
       color: #0645AD;
       font-size: 2.5rem;
       margin-bottom: 10px;
+    }
+
+    .table-wrapper {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-top: 10px;
     }
 
     table {
@@ -61,13 +53,10 @@
       text-transform: uppercase;
     }
 
-    tr {
-      transition: background 0.3s ease, transform 0.2s ease;
-    }
-
     tr:hover {
       background-color: #f0f4ff;
       transform: translateY(-2px);
+      transition: background 0.3s ease, transform 0.2s ease;
     }
 
     .countdown {
@@ -79,7 +68,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      min-width: 120px;
+      min-width: 140px;
       animation: fadeIn 0.5s ease-in;
     }
 
@@ -98,35 +87,8 @@
       background: #dc3545;
     }
 
-    .footer {
-      margin-top: 40px;
-      font-size: 1rem;
-      color: #555;
-    }
-
-    .footer strong {
-      color: #0645AD;
-    }
-
-    .links {
-      margin-top: 10px;
-    }
-
-    .links a {
-      display: inline-block;
-      margin: 8px 12px;
-      text-decoration: none;
-      color: #0645AD;
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
-
-    .links a:hover {
-      color: #0a6dd6;
-    }
-
     .dark-mode-toggle {
-      margin: 20px auto;
+      margin: 30px auto;
       padding: 10px 20px;
       font-size: 1rem;
       background: #6c757d;
@@ -134,7 +96,6 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      transition: background 0.3s ease;
     }
 
     .dark-mode-toggle:hover {
@@ -154,12 +115,6 @@
       color: #ecf0f1;
     }
 
-    body.dark-mode h1,
-    body.dark-mode .footer,
-    body.dark-mode .footer strong {
-      color: #3498db;
-    }
-
     body.dark-mode table {
       background: #34495e;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -167,10 +122,6 @@
 
     body.dark-mode th {
       background: linear-gradient(45deg, #3498db, #2980b9);
-    }
-
-    body.dark-mode td {
-      border-bottom: 1px solid #4a6278;
     }
 
     body.dark-mode tr:hover {
@@ -189,61 +140,35 @@
       background: #c0392b;
     }
 
-    body.dark-mode .countdown span {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    body.dark-mode .links a {
-      color: #3498db;
-    }
-
-    body.dark-mode .links a:hover {
-      color: #1abc9c;
-    }
-
-    body.dark-mode .dark-mode-toggle {
-      background: #3498db;
-    }
-
-    body.dark-mode .dark-mode-toggle:hover {
-      background: #2980b9;
-    }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: scale(0.9); }
       to { opacity: 1; transform: scale(1); }
     }
 
     @media (max-width: 600px) {
-      body {
-        padding: 20px;
-      }
       h1 {
         font-size: 1.8rem;
       }
+
       table {
         width: 100%;
       }
+
       th, td {
         padding: 10px;
         font-size: 0.9rem;
       }
+
       .countdown {
         padding: 6px 12px;
         font-size: 0.8rem;
-        min-width: 100px;
         gap: 5px;
+        min-width: 100px;
       }
+
       .countdown span {
         padding: 3px 6px;
         font-size: 0.7em;
-      }
-      .footer {
-        font-size: 0.9rem;
-      }
-      .links a {
-        margin: 5px 8px;
-        font-size: 0.9rem;
       }
     }
   </style>
@@ -255,9 +180,9 @@
     <table role="grid" aria-label="SSC exam countdown table">
       <thead>
         <tr>
-          <th scope="col">Exam</th>
-          <th scope="col">Date</th>
-          <th scope="col">Time Left</th>
+          <th>Exam</th>
+          <th>Date</th>
+          <th>Time Left</th>
         </tr>
       </thead>
       <tbody id="countdown-table"></tbody>
@@ -269,12 +194,6 @@
   </div>
 
   <button onclick="toggleDarkMode()" class="dark-mode-toggle">Toggle Dark Mode</button>
-
-  <noscript>
-    <p style="color: #dc3545; text-align: center; margin-top: 20px;">
-      JavaScript is required to view the countdown. Please enable JavaScript or check the exam dates manually.
-    </p>
-  </noscript>
 
   <script>
     const exams = [
@@ -291,30 +210,22 @@
     function updateCountdown() {
       try {
         tableBody.innerHTML = "";
-        const today = new Date();
-
-        if (!exams || exams.length === 0) {
-          throw new Error("No exam data available.");
-        }
+        const now = new Date();
 
         exams.forEach(exam => {
           const examDate = new Date(exam.date + "T00:00:00");
+          const diffTime = examDate.getTime() - now.getTime();
 
-          if (isNaN(examDate.getTime())) {
-            console.error(`Invalid date for exam: ${exam.name}`);
-            return;
-          }
-
-          const diffTime = examDate.getTime() - today.getTime();
           const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
           const diffHours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
           const diffMinutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+          const diffSeconds = Math.floor((diffTime % (1000 * 60)) / 1000);
 
           let countdownText = "";
           let countdownClass = "";
 
           if (diffTime > 0) {
-            countdownText = `<span>${diffDays} days</span> <span>${diffHours}h</span> <span>${diffMinutes}m</span>`;
+            countdownText = `<span>${diffDays}d</span> <span>${diffHours}h</span> <span>${diffMinutes}m</span> <span>${diffSeconds}s</span>`;
           } else if (diffTime > -86400000) {
             countdownText = "Exam Day!";
             countdownClass = "exam-day";
@@ -332,10 +243,6 @@
           tableBody.appendChild(row);
         });
 
-        if (tableBody.children.length === 0) {
-          throw new Error("No rows were added to the table.");
-        }
-
         errorMessage.style.display = "none";
       } catch (error) {
         console.error("Error updating countdown:", error);
@@ -348,7 +255,7 @@
     }
 
     updateCountdown();
-    setInterval(updateCountdown, 1000 * 60);
+    setInterval(updateCountdown, 1000); // updates every second
   </script>
 </body>
 </html>
