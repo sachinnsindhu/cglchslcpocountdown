@@ -1,395 +1,138 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Countdown timer for upcoming exams including LIC AAO, RRB PO, RRB Clerk, IBPS PO, and IBPS Clerk.">
-    <meta name="keywords" content="bank exams, countdown timer, LIC AAO, RRB PO, IBPS PO, exam dates">
-    <meta name="author" content="Tanu Garg">
-    <meta property="og:title" content="Bank Exam Dates Countdown">
-    <meta property="og:description" content="Track upcoming bank exam dates with our countdown timer by Future Bankers - Tanu Garg.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourwebsite.com">
-    <meta property="og:image" content="https://yourwebsite.com/og-image.jpg">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" as="style" onload="this.rel='stylesheet'">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
-    <title>Bank Exam Countdown</title>
+    <title>Bank Exam Countdown - Future Bankers</title>
     <style>
         body {
-            font-family: 'Roboto', Arial, sans-serif;
-            background: linear-gradient(135deg, #e0e7ff, #f7f7f7);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .countdown-container {
-            background: #ffffff;
+            font-family: 'Segoe UI', sans-serif;
+            background: #f2f8ff;
+            color: #333;
+            text-align: center;
             padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-            text-align: center;
-            width: 100%;
-            max-width: 700px;
-            margin: 0 auto;
         }
-
         h1 {
-            font-size: 2.5rem;
-            color: #1a3c6e;
-            margin-bottom: 10px;
+            color: #0645AD;
+            font-size: 32px;
         }
-
-        .channel-credit {
-            font-size: 1.2rem;
-            color: #2d2d2d;
-            margin-bottom: 30px;
+        table {
+            margin: 30px auto;
+            border-collapse: collapse;
+            width: 90%;
+            max-width: 800px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-
-        .channel-credit a {
-            color: #007BFF;
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #0645AD;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #555;
+        }
+        .links a {
+            display: inline-block;
+            margin: 8px 12px;
             text-decoration: none;
-        }
-
-        .channel-credit a:hover {
-            text-decoration: underline;
-        }
-
-        .exam-date {
-            margin: 20px 0;
-            font-size: 1.3rem;
-            color: #2d2d2d;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border-radius: 6px;
-            transition: background 0.3s ease;
-        }
-
-        .exam-date:hover {
-            background: #f0f4ff;
-        }
-
-        .exam-date strong {
-            font-weight: 600;
-            color: #1a3c6e;
-        }
-
-        .exam-date a {
-            color: #007BFF;
-            text-decoration: none;
-        }
-
-        .exam-date a:hover {
-            text-decoration: underline;
-        }
-
-        .countdown {
-            font-size: 1.4rem;
+            color: #0645AD;
             font-weight: bold;
-            color: #007BFF;
-            background: #e6f0ff;
-            padding: 5px 10px;
-            border-radius: 4px;
-        }
-
-        .exam-date-text {
-            font-size: 0.9rem;
-            color: #666;
-            margin-left: 10px;
-        }
-
-        .refresh-button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1rem;
-            background: #007BFF;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .refresh-button:hover {
-            background: #0056b3;
-        }
-
-        .dark-mode-toggle {
-            margin-top: 10px;
-            padding: 10px 20px;
-            font-size: 1rem;
-            background: #6c757d;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .dark-mode-toggle:hover {
-            background: #5a6268;
-        }
-
-        .social-links {
-            margin-top: 30px;
-            text-align: center;
-        }
-
-        .social-links h2 {
-            font-size: 1.5rem;
-            color: #1a3c6e;
-            margin-bottom: 15px;
-        }
-
-        .social-links ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .social-links li {
-            display: inline-block;
-        }
-
-        .social-links a {
-            display: inline-block;
-            padding: 8px 15px;
-            font-size: 1rem;
-            color: #fff;
-            background: #007BFF;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: #0056b3;
-        }
-
-        body.dark-mode {
-            background: linear-gradient(135deg, #2c3e50, #34495e);
-            color: #ecf0f1;
-        }
-
-        body.dark-mode .countdown-container {
-            background: #2c3e50;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        body.dark-mode .exam-date {
-            color: #ecf0f1;
-        }
-
-        body.dark-mode .countdown {
-            color: #3498db;
-            background: #34495e;
-        }
-
-        body.dark-mode .refresh-button {
-            background: #3498db;
-        }
-
-        body.dark-mode .refresh-button:hover {
-            background: #2980b9;
-        }
-
-        body.dark-mode .dark-mode-toggle {
-            background: #3498db;
-        }
-
-        body.dark-mode .dark-mode-toggle:hover {
-            background: #2980b9;
-        }
-
-        body.dark-mode .channel-credit {
-            color: #ecf0f1;
-        }
-
-        body.dark-mode .social-links h2 {
-            color: #ecf0f1;
-        }
-
-        body.dark-mode .social-links a {
-            background: #3498db;
-        }
-
-        body.dark-mode .social-links a:hover {
-            background: #2980b9;
-        }
-
-        @media (max-width: 600px) {
-            .countdown-container {
-                padding: 20px;
-            }
-            h1 {
-                font-size: 1.8rem;
-            }
-            .channel-credit {
-                font-size: 1rem;
-            }
-            .exam-date {
-                font-size: 1.1rem;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .countdown {
-                font-size: 1.2rem;
-                margin-top: 10px;
-            }
-            .exam-date-text {
-                margin-left: 0;
-                margin-top: 5px;
-            }
-            .social-links ul {
-                flex-direction: column;
-                gap: 10px;
-            }
         }
     </style>
 </head>
 <body>
-    <section class="countdown-container" aria-labelledby="countdown-title">
-        <h1 id="countdown-title">Upcoming Exam Dates Countdown</h1>
-        <p class="channel-credit">By <a href="https://linktr.ee/tanugarg01" target="_blank">Future Bankers - Tanu Garg</a></p>
+    <h1>Upcoming Bank Exams Countdown</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Exam</th>
+                <th>Date</th>
+                <th>Days Left</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        <tr>
+            <td>LIC AAO Prelims</td>
+            <td>05 July 2025</td>
+            <td>67 days</td>
+        </tr>
+    
+        <tr>
+            <td>LIC AAO Mains</td>
+            <td>10 August 2025</td>
+            <td>103 days</td>
+        </tr>
+    
+        <tr>
+            <td>RRB PO Prelims</td>
+            <td>27 July 2025</td>
+            <td>89 days</td>
+        </tr>
+    
+        <tr>
+            <td>RRB PO Mains</td>
+            <td>13 September 2025</td>
+            <td>137 days</td>
+        </tr>
+    
+        <tr>
+            <td>RRB Clerk Prelims</td>
+            <td>30 August 2025</td>
+            <td>123 days</td>
+        </tr>
+    
+        <tr>
+            <td>RRB Clerk Mains</td>
+            <td>09 November 2025</td>
+            <td>194 days</td>
+        </tr>
+    
+        <tr>
+            <td>IBPS PO Prelims</td>
+            <td>04 October 2025</td>
+            <td>158 days</td>
+        </tr>
+    
+        <tr>
+            <td>IBPS PO Mains</td>
+            <td>29 November 2025</td>
+            <td>214 days</td>
+        </tr>
+    
+        <tr>
+            <td>IBPS Clerk Prelims</td>
+            <td>06 December 2025</td>
+            <td>221 days</td>
+        </tr>
+    
+        <tr>
+            <td>IBPS Clerk Mains</td>
+            <td>01 February 2026</td>
+            <td>278 days</td>
+        </tr>
+    
+        </tbody>
+    </table>
 
-        <article class="exam-date" role="region" aria-label="LIC AAO Prelims countdown" data-date="">
-            <strong><a href="https://www.licindia.in/" target="_blank">LIC AAO Prelims:</a></strong>
-            <span id="countdown-lic-aao-prelims" class="countdown"></span>
-            <span class="exam-date-text"> (Date: <span data-date></span>)</span>
-        </article>
-        <article class="exam-date" role="region" aria-label="LIC AAO Mains countdown" data-date="">
-            <strong><a href="https://www.licindia.in/" target="_blank">LIC AAO Mains:</a></strong>
-            <span id="countdown-lic-aao-mains" class="countdown"></span>
-            <span class="exam-date-text"> (Date: <span data-date></span>)</span>
-        </article>
-        <article class="exam-date" role="region" aria-label="RRB PO Prelims countdown" data-date="">
-            <strong><a href="https://www.rrb.gov.in/" target="_blank">RRB PO Prelims:</a></strong>
-            <span id="countdown-rrb-po-prelims" class="countdown"></span>
-            <span class="exam-date-text"> (Date: <span data-date></span>)</span>
-        </article>
-        <article class="exam-date" role="region" aria-label="RRB PO Mains countdown" data-date="">
-            <strong><a href="https://www.rrb.gov.in/" target="_blank">RRB PO Mains:</a></strong>
-            <span id="countdown-rrb-po-mains" class="countdown"></span>
-            <span class="exam-date-text"> (Date: <span data-date></span>)</span>
-        </article>
-        <article class="exam-date" role="region" aria-label="RRB Clerk Prelims countdown" data-date="">
-            <strong><a href="https://www.rrb.gov.in/" target="_blank">RRB Clerk Prelims:</a></strong>
-            <span id="countdown-rrb-clerk-prelims" class="countdown"></span>
-            <span class="exam-date-text"> (Date: <span data-date></span>)</span>
-        </article>
-        <article class="exam-date" role="region" aria-label="RRB Clerk Mains countdown" data-date="">
-            <strong><a href="https://www.rrb.gov.in/" target="_blank">RRB Clerk Mains:</a></strong>
-            <span id="countdown-rrb-clerk-mains" class="countdown"></span>
-            <span class="exam-date-text"> (Date: <span data-date></span>)</span>
-        </article>
-        <article class="exam-date" role="region" aria-label="IBPS PO Prelims countdown" data-date="">
-            <strong><a href="https://www.ibps.in/" target="_blank">IBPS PO Prelims:</a></strong>
-            <span id="countdown-ibps-po-prelims" class="countdown"></span>
-            <span class="exam-date-text"> (Date: <span data-date></span>)</span>
-        </article>
-        <article class="exam-date" role="region" aria-label="IBPS PO Mains countdown" data-date="">
-            <strong><a href="https://www.ibps.in/" target="_blank">IBPS PO Mains:</a></strong>
-            <span id="countdown-ibps-po-mains" class="countdown"></span>
-            <span class="exam-date-text"> (Date: <span data-date></span>)</span>
-        </article>
-        <article class="exam-date" role="region" aria-label="IBPS Clerk Prelims countdown" data-date="">
-            <strong><a href="https://www.ibps.in/" target="_blank">IBPS Clerk Prelims:</a></strong>
-            <span id="countdown-ibps-clerk-prelims" class="countdown"></span>
-            <span class="exam-date-text"> (Date: <span data-date></span>)</span>
-        </article>
-        <article class="exam-date" role="region" aria-label="IBPS Clerk Mains countdown" data-date="">
-            <strong><a href="https://www.ibps.in/" target="_blank">IBPS Clerk Mains:</a></strong>
-            <span id="countdown-ibps-clerk-mains" class="countdown"></span>
-            <span class="exam-date-text"> (Date: <span data-date></span>)</span>
-        </article>
-
-        <button onclick="updateCountdown()" class="refresh-button">Refresh Countdown</button>
-        <button onclick="toggleDarkMode()" class="dark-mode-toggle">Toggle Dark Mode</button>
-
-        <div class="social-links">
-            <h2>Join Future Bankers by Tanu Garg</h2>
-            <ul>
-                <li><a href="https://linktr.ee/tanugarg01" target="_blank" rel="noopener" aria-label="Linktree for all social media accounts">All Socials (Linktree)</a></li>
-                <li><a href="https://youtube.com/@futurebankers01" target="_blank" rel="noopener" aria-label="Future Bankers YouTube channel">YouTube</a></li>
-                <li><a href="https://www.instagram.com/tanugarg01" target="_blank" rel="noopener" aria-label="Tanu Garg Instagram">Instagram</a></li>
-                <li><a href="https://www.instagram.com/tanugarrgg01" target="_blank" rel="noopener" aria-label="Banking Instagram">Banking Instagram</a></li>
-            </ul>
+    <div class="footer">
+        Provided by <strong>Future Bankers – Tanu Garg</strong>
+        <div class="links">
+            <a href="https://linktr.ee/tanugarg01" target="_blank">LinkTree</a> |
+            <a href="https://t.me/tanugarg01" target="_blank">Telegram</a> |
+            <a href="https://youtube.com/@futurebankers01" target="_blank">YouTube</a> |
+            <a href="https://www.instagram.com/tanugarg01" target="_blank">Instagram</a> |
+            <a href="https://www.instagram.com/tanugarrgg01" target="_blank">Banking Instagram</a>
         </div>
-
-        <noscript>
-            <p style="color: #dc3545; text-align: center;">JavaScript is required to view the countdown. Please enable JavaScript or check the exam dates manually.</p>
-        </noscript>
-    </section>
-
-    <script>
-        // Exam dates
-        const examDates = {
-            "LIC AAO Prelims": new Date("July 5, 2025"),
-            "LIC AAO Mains": new Date("August 10, 2025"),
-            "RRB PO Prelims": new Date("July 27, 2025"),
-            "RRB PO Mains": new Date("September 13, 2025"),
-            "RRB Clerk Prelims": new Date("August 30, 2025"),
-            "RRB Clerk Mains": new Date("November 9, 2025"),
-            "IBPS PO Prelims": new Date("October 4, 2025"),
-            "IBPS PO Mains": new Date("November 29, 2025"),
-            "IBPS Clerk Prelims": new Date("December 6, 2025"),
-            "IBPS Clerk Mains": new Date("February 1, 2026")
-        };
-
-        // Function to format dates
-        function formatDate(date) {
-            return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-        }
-
-        // Function to calculate time difference
-        function updateCountdown() {
-            const now = new Date().getTime();
-            Object.keys(examDates).forEach(exam => {
-                const countdownElement = document.getElementById(`countdown-${exam.replace(/\s+/g, '-').toLowerCase()}`);
-                const examTime = examDates[exam].getTime();
-                const timeLeft = examTime - now;
-
-                if (timeLeft > 0) {
-                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                    countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-                    countdownElement.style.color = '#007BFF';
-                } else if (timeLeft > -86400000) {
-                    countdownElement.innerHTML = "EXAM DAY!";
-                    countdownElement.style.color = '#28a745';
-                } else {
-                    countdownElement.innerHTML = "Exam Completed";
-                    countdownElement.style.color = '#dc3545';
-                }
-            });
-        }
-
-        // Function to toggle dark mode
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-        }
-
-        // Initial call and interval
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-
-        // Add exam dates to HTML
-        Object.keys(examDates).forEach(exam => {
-            const countdownElement = document.getElementById(`countdown-${exam.replace(/\s+/g, '-').toLowerCase()}`);
-            const dateElement = countdownElement.parentElement.querySelector('[data-date]');
-            dateElement.textContent = formatDate(examDates[exam]);
-        });
-    </script>
+    </div>
 </body>
 </html>
