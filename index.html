@@ -19,13 +19,14 @@
     h1 {
       color: #0645AD;
       font-size: 2.5rem;
-      margin-bottom: 45px; /* space between heading and table */
+      margin-bottom: 50px; /* Increased space below heading */
     }
 
     .table-wrapper {
       display: flex;
       justify-content: center;
       width: 100%;
+      margin-bottom: 40px; /* Added space below table */
     }
 
     table {
@@ -42,6 +43,8 @@
       padding: 15px;
       border-bottom: 1px solid #ddd;
       font-size: 1.1rem;
+      vertical-align: middle;
+      text-align: center;
     }
 
     th {
@@ -83,7 +86,7 @@
     }
 
     .dark-mode-toggle {
-      margin: 45px auto;
+      margin: 30px auto;
       padding: 10px 20px;
       font-size: 1rem;
       background: #6c757d;
@@ -196,6 +199,12 @@
     const tableBody = document.getElementById("countdown-table");
     const errorMessage = document.getElementById("error-message");
 
+    function formatDateIndianStyle(dateObj) {
+      const options = { day: 'numeric', month: 'long', year: 'numeric' };
+      const parts = dateObj.toLocaleDateString("en-IN", options).split(" ");
+      return `${parts[0]}<br>${parts[1]}<br>${parts[2]}`;
+    }
+
     function updateCountdown() {
       try {
         tableBody.innerHTML = "";
@@ -225,7 +234,7 @@
           const row = document.createElement("tr");
           row.innerHTML = `
             <td>${exam.name}</td>
-            <td>${examDate.toLocaleDateString("en-IN", { day: '2-digit', month: 'long', year: 'numeric' })}</td>
+            <td>${formatDateIndianStyle(examDate)}</td>
             <td><span class="countdown ${countdownClass}">${countdownText}</span></td>
           `;
           tableBody.appendChild(row);
