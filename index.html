@@ -20,6 +20,9 @@
       padding: 0;
       background-color: var(--bg-color);
       color: var(--text-color);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
       transition: background-color 0.3s, color 0.3s;
     }
 
@@ -92,9 +95,10 @@
       --bg-color: #f4f4f4;
       --text-color: #000000;
       --header-bg: linear-gradient(to right, #cce6ff, #99ccff);
-      --row-bg: #ffffff;
+      --row-bg: rgba(255, 255, 255, 0.8);
       --border-color: #cccccc;
       --badge-bg: linear-gradient(to right, #3399ff, #66ccff);
+      background-image: url('/mnt/data/e0b444bc-3beb-413b-8803-8a0731d55ca8.png');
     }
 
     body.light-mode .toggle-button {
@@ -141,7 +145,7 @@
   </div>
 
   <div class="toggle-container">
-    <button class="toggle-button" onclick="toggleMode()">Toggle Dark/Light Mode</button>
+    <button class="toggle-button" onclick="toggleMode()">Dark Mode</button>
   </div>
 
   <script>
