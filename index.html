@@ -9,66 +9,71 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f5f7fa;
+      background: #ecf3fc;
       color: #333;
       transition: background 0.3s, color 0.3s;
     }
 
     .container {
-      max-width: 800px;
+      max-width: 850px;
       margin: 40px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     }
 
     h1 {
       text-align: center;
-      color: #007bff;
+      color: #0b57d0;
       margin-bottom: 30px;
+      font-size: 28px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
+      font-size: 18px;
     }
 
     th, td {
-      padding: 14px 20px;
+      padding: 16px 20px;
       text-align: center;
       border-bottom: 1px solid #ddd;
     }
 
     th {
-      background: #007bff;
-      color: #fff;
-      font-size: 16px;
+      background: linear-gradient(90deg, #0b57d0, #008eff);
+      color: white;
+      font-size: 18px;
     }
 
     tr:hover {
-      background-color: #f1f1f1;
+      background-color: #f4faff;
     }
 
     .countdown {
       display: inline-block;
-      padding: 6px 12px;
+      padding: 8px 14px;
       border-radius: 20px;
-      background: #007bff;
-      color: #fff;
+      background: linear-gradient(to right, #007bff, #00c4ff);
+      color: white;
       font-weight: bold;
-      min-width: 110px;
+      font-size: 16px;
+      min-width: 160px;
+      box-shadow: 0 0 6px rgba(0, 191, 255, 0.5);
     }
 
     #toggleDarkMode {
       display: block;
-      margin: 25px auto 0;
-      padding: 10px 24px;
+      margin: 30px auto 0;
+      padding: 10px 26px;
       background-color: #007bff;
       color: white;
       border: none;
       border-radius: 6px;
       cursor: pointer;
+      font-size: 16px;
       transition: 0.3s;
     }
 
@@ -91,11 +96,6 @@
       color: #21CBF3;
     }
 
-    body.dark-mode table {
-      background: #1E293B;
-      color: #E1E8F0;
-    }
-
     body.dark-mode th {
       background: linear-gradient(45deg, #2196F3, #21CBF3);
       color: white;
@@ -113,7 +113,6 @@
 
     body.dark-mode #toggleDarkMode {
       background-color: #2196F3;
-      color: white;
     }
 
     body.dark-mode #toggleDarkMode:hover {
@@ -130,34 +129,34 @@
         <tr>
           <th>EXAM</th>
           <th>DATE</th>
-          <th>COUNTDOWN</th>
+          <th>TIME LEFT</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>SSC CGL Tier-1</td>
           <td>13 August 2025</td>
-          <td><span class="countdown">92d 14h 45m</span></td>
+          <td><span class="countdown" data-date="2025-08-13T00:00:00"></span></td>
         </tr>
         <tr>
           <td>SSC CHSL Tier-1</td>
           <td>08 September 2025</td>
-          <td><span class="countdown">118d 14h 45m</span></td>
+          <td><span class="countdown" data-date="2025-09-08T00:00:00"></span></td>
         </tr>
         <tr>
           <td>SSC CPO Tier-1</td>
           <td>01 September 2025</td>
-          <td><span class="countdown">111d 14h 45m</span></td>
+          <td><span class="countdown" data-date="2025-09-01T00:00:00"></span></td>
         </tr>
         <tr>
           <td>DP CONSTABLE</td>
           <td>01 November 2025</td>
-          <td><span class="countdown">172d 14h 45m</span></td>
+          <td><span class="countdown" data-date="2025-11-01T00:00:00"></span></td>
         </tr>
         <tr>
           <td>SSC GD</td>
           <td>01 January 2026</td>
-          <td><span class="countdown">233d 14h 45m</span></td>
+          <td><span class="countdown" data-date="2026-01-01T00:00:00"></span></td>
         </tr>
       </tbody>
     </table>
@@ -165,12 +164,32 @@
   </div>
 
   <script>
-    const toggleBtn = document.getElementById('toggleDarkMode');
-    toggleBtn.addEventListener('click', () => {
+    function updateCountdowns() {
+      const now = new Date().getTime();
+      document.querySelectorAll('.countdown').forEach(span => {
+        const targetDate = new Date(span.getAttribute('data-date')).getTime();
+        const diff = targetDate - now;
+
+        if (diff <= 0) {
+          span.textContent = "Started";
+          return;
+        }
+
+        const seconds = Math.floor((diff / 1000) % 60);
+        const minutes = Math.floor((diff / 1000 / 60) % 60);
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+        span.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      });
+    }
+
+    setInterval(updateCountdowns, 1000);
+    updateCountdowns();
+
+    document.getElementById('toggleDarkMode').addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
     });
   </script>
 </body>
 </html>
-
-
