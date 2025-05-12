@@ -1,178 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Upcoming SSC Exams Countdown</title>
+  <meta charset="UTF-8">
+  <title>Upcoming Bank Exams Countdown</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    :root {
-      --bg-color: #0f172a;
-      --text-color: #ffffff;
-      --card-bg: #1e293b;
-      --badge-bg: linear-gradient(to right, #007acc, #00bcd4);
-      --header-color: #ffffff;
-    }
-
     body {
       font-family: Arial, sans-serif;
+      background: #f0f4ff;
+      color: #000;
       margin: 0;
       padding: 0;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      transition: background-color 0.3s, color 0.3s;
     }
 
     h1 {
       text-align: center;
-      padding: 30px 20px;
-      font-size: 2em;
-      color: var(--header-color);
+      padding: 20px;
+      color: #0047ab;
     }
 
-    .cards-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      max-width: 1000px;
+    table {
+      width: 90%;
       margin: 0 auto;
-      padding: 20px;
+      border-collapse: collapse;
+      background: #ffffff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    .exam-card {
-      background-color: var(--card-bg);
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    th {
+      background: #0047ab;
+      color: white;
+      padding: 15px;
+      font-size: 1em;
+    }
+
+    td {
+      padding: 15px;
       text-align: center;
+      border-bottom: 1px solid #e0e0e0;
     }
 
-    .exam-title {
-      font-size: 1.2em;
-      font-weight: bold;
-      margin-bottom: 10px;
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .exam-date {
-      color: #bbb;
-      margin-bottom: 12px;
-      font-size: 0.95em;
-    }
-
-    .badge {
-      background: var(--badge-bg);
+    .pill {
+      background: linear-gradient(to right, #007acc, #00bcd4);
       color: white;
       border-radius: 20px;
-      padding: 10px 16px;
-      display: inline-block;
+      padding: 8px 14px;
+      font-size: 0.9em;
       font-weight: bold;
-      font-size: 1em;
-    }
-
-    .toggle-container {
+      min-width: 60px;
       text-align: center;
-      padding: 30px 0;
     }
 
-    .toggle-button {
-      background: #ffffff;
-      color: #000000;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 20px;
-      font-size: 1em;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s, color 0.3s;
-    }
+    @media (max-width: 768px) {
+      table, th, td {
+        font-size: 0.9em;
+      }
 
-    body.light-mode {
-      --bg-color: #f4f4f4;
-      --text-color: #000000;
-      --card-bg: #ffffff;
-      --badge-bg: linear-gradient(to right, #3399ff, #66ccff);
-      --header-color: #000000;
-    }
-
-    body.light-mode .toggle-button {
-      background: #000000;
-      color: #ffffff;
+      .pill {
+        font-size: 0.8em;
+        padding: 6px 10px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Upcoming SSC Exams Countdown</h1>
 
-  <div class="cards-container">
-    <div class="exam-card">
-      <div class="exam-title">SSC CGL Tier-1</div>
-      <div class="exam-date">13 August 2025</div>
-      <div class="badge" id="sscCglTier1"></div>
-    </div>
+  <h1>Upcoming Bank Exams Countdown</h1>
 
-    <div class="exam-card">
-      <div class="exam-title">SSC CHSL Tier-1</div>
-      <div class="exam-date">08 September 2025</div>
-      <div class="badge" id="sscChslTier1"></div>
-    </div>
-
-    <div class="exam-card">
-      <div class="exam-title">SSC CPO Tier-1</div>
-      <div class="exam-date">01 September 2025</div>
-      <div class="badge" id="sscCpoTier1"></div>
-    </div>
-
-    <div class="exam-card">
-      <div class="exam-title">DP CONSTABLE</div>
-      <div class="exam-date">01 November 2025</div>
-      <div class="badge" id="dpConstable"></div>
-    </div>
-
-    <div class="exam-card">
-      <div class="exam-title">SSC GD</div>
-      <div class="exam-date">01 January 2026</div>
-      <div class="badge" id="sscGd"></div>
-    </div>
-  </div>
-
-  <div class="toggle-container">
-    <button class="toggle-button" onclick="toggleMode()">Toggle Dark/Light Mode</button>
-  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>EXAM</th>
+        <th>DATE</th>
+        <th>TIME LEFT</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>RRB PO Prelims</td>
+        <td>27 July 2025</td>
+        <td class="countdown" id="rrbPoPrelims"></td>
+      </tr>
+      <tr>
+        <td>RRB PO Mains</td>
+        <td>13 September 2025</td>
+        <td class="countdown" id="rrbPoMains"></td>
+      </tr>
+      <tr>
+        <td>RRB Clerk Prelims</td>
+        <td>30 August 2025</td>
+        <td class="countdown" id="rrbClerkPrelims"></td>
+      </tr>
+      <tr>
+        <td>RRB Clerk Mains</td>
+        <td>09 November 2025</td>
+        <td class="countdown" id="rrbClerkMains"></td>
+      </tr>
+      <tr>
+        <td>IBPS PO Prelims</td>
+        <td>04 October 2025</td>
+        <td class="countdown" id="ibpsPoPrelims"></td>
+      </tr>
+      <tr>
+        <td>IBPS PO Mains</td>
+        <td>29 November 2025</td>
+        <td class="countdown" id="ibpsPoMains"></td>
+      </tr>
+      <tr>
+        <td>IBPS Clerk Prelims</td>
+        <td>06 December 2025</td>
+        <td class="countdown" id="ibpsClerkPrelims"></td>
+      </tr>
+      <tr>
+        <td>IBPS Clerk Mains</td>
+        <td>01 February 2026</td>
+        <td class="countdown" id="ibpsClerkMains"></td>
+      </tr>
+    </tbody>
+  </table>
 
   <script>
     const exams = {
-      sscCglTier1: "2025-08-13T00:00:00",
-      sscChslTier1: "2025-09-08T00:00:00",
-      sscCpoTier1: "2025-09-01T00:00:00",
-      dpConstable: "2025-11-01T00:00:00",
-      sscGd: "2026-01-01T00:00:00"
+      rrbPoPrelims: "2025-07-27T00:00:00",
+      rrbPoMains: "2025-09-13T00:00:00",
+      rrbClerkPrelims: "2025-08-30T00:00:00",
+      rrbClerkMains: "2025-11-09T00:00:00",
+      ibpsPoPrelims: "2025-10-04T00:00:00",
+      ibpsPoMains: "2025-11-29T00:00:00",
+      ibpsClerkPrelims: "2025-12-06T00:00:00",
+      ibpsClerkMains: "2026-02-01T00:00:00"
     };
 
     function updateCountdowns() {
       const now = new Date().getTime();
 
       for (const id in exams) {
-        const examDate = new Date(exams[id]).getTime();
-        const diff = examDate - now;
+        const target = new Date(exams[id]).getTime();
+        const diff = target - now;
+
+        const container = document.getElementById(id);
+        container.innerHTML = ""; // Clear previous
 
         if (diff > 0) {
           const days = Math.floor(diff / (1000 * 60 * 60 * 24));
           const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
           const minutes = Math.floor((diff / (1000 * 60)) % 60);
-          const seconds = Math.floor((diff / 1000) % 60);
 
-          document.getElementById(id).textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+          container.innerHTML = `
+            <span class="pill">${days} days</span>
+            <span class="pill">${hours}h</span>
+            <span class="pill">${minutes}m</span>
+          `;
         } else {
-          document.getElementById(id).textContent = "Started";
+          container.innerHTML = `<span class="pill">Started</span>`;
         }
       }
     }
 
-    function toggleMode() {
-      document.body.classList.toggle('light-mode');
-    }
-
-    setInterval(updateCountdowns, 1000);
+    setInterval(updateCountdowns, 60000); // update every 60s
     updateCountdowns();
   </script>
+
 </body>
 </html>
