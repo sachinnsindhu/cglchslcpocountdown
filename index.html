@@ -5,19 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Upcoming SSC Exams Countdown</title>
   <style>
+    :root {
+      --bg-color: #0f172a;
+      --text-color: #ffffff;
+      --header-bg: linear-gradient(to right, #073763, #005a9e);
+      --row-bg: #1e293b;
+      --border-color: #334155;
+      --badge-bg: linear-gradient(to right, #007acc, #00bcd4);
+    }
+
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #0f172a; /* Dark mode background */
-      color: #ffffff;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
     }
 
     h1 {
       text-align: center;
       padding: 30px 20px;
       font-size: 2em;
-      color: #ffffff;
     }
 
     .table {
@@ -34,17 +43,16 @@
     }
 
     .table-header {
-      background: linear-gradient(to right, #073763, #005a9e); /* Darker gradient */
+      background: var(--header-bg);
       font-weight: bold;
-      color: white;
       padding: 16px 24px;
       font-size: 1.1em;
     }
 
     .table-row {
-      background-color: #1e293b;
+      background-color: var(--row-bg);
       padding: 14px 24px;
-      border-bottom: 1px solid #334155;
+      border-bottom: 1px solid var(--border-color);
     }
 
     .cell {
@@ -53,7 +61,7 @@
     }
 
     .badge {
-      background: linear-gradient(to right, #007acc, #00bcd4);
+      background: var(--badge-bg);
       color: white;
       border-radius: 20px;
       padding: 8px 14px;
@@ -61,6 +69,37 @@
       font-weight: bold;
       font-size: 0.95em;
       min-width: 120px;
+    }
+
+    .toggle-container {
+      text-align: center;
+      padding: 30px 0;
+    }
+
+    .toggle-button {
+      background: #ffffff;
+      color: #000000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 1em;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.light-mode {
+      --bg-color: #f4f4f4;
+      --text-color: #000000;
+      --header-bg: linear-gradient(to right, #cce6ff, #99ccff);
+      --row-bg: #ffffff;
+      --border-color: #cccccc;
+      --badge-bg: linear-gradient(to right, #3399ff, #66ccff);
+    }
+
+    body.light-mode .toggle-button {
+      background: #000000;
+      color: #ffffff;
     }
   </style>
 </head>
@@ -74,7 +113,6 @@
       <div class="cell">TIME LEFT</div>
     </div>
 
-    <!-- SSC Exam Rows -->
     <div class="table-row">
       <div class="cell">SSC CGL Tier-1</div>
       <div class="cell">13 August 2025</div>
@@ -100,6 +138,10 @@
       <div class="cell">01 January 2026</div>
       <div class="cell"><span class="badge" id="sscGd"></span></div>
     </div>
+  </div>
+
+  <div class="toggle-container">
+    <button class="toggle-button" onclick="toggleMode()">Toggle Dark/Light Mode</button>
   </div>
 
   <script>
@@ -129,6 +171,10 @@
           document.getElementById(id).textContent = "Started";
         }
       }
+    }
+
+    function toggleMode() {
+      document.body.classList.toggle('light-mode');
     }
 
     setInterval(updateCountdowns, 1000);
