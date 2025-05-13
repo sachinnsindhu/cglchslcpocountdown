@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SSC CGL Tier-1 Countdown</title>
+  <title>SSC CGL Countdown</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     body {
-      font-family: 'Roboto', 'Segoe UI', sans-serif;
+      font-family: 'Roboto', sans-serif;
       background: linear-gradient(135deg, #2c3e50, #34495e);
       color: #ecf0f1;
       text-align: center;
@@ -16,38 +16,35 @@
     }
 
     h1 {
-      color: #3498db;
-      font-size: 2.5rem;
-      margin-bottom: 200px;
+      font-size: 2.2rem;
+      margin-bottom: 100px;
     }
 
     .table-wrapper {
       display: flex;
       justify-content: center;
       width: 100%;
-      margin-bottom: 30px;
     }
 
     table {
       border-collapse: collapse;
       width: 90%;
       max-width: 800px;
-      background: #34495e;
+      background-color: #34495e;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
       border-radius: 8px;
       overflow: hidden;
     }
 
     td {
-      padding: 15px;
+      padding: 20px;
       border-bottom: 1px solid #555;
-      font-size: 1.1rem;
-      vertical-align: middle;
+      font-size: 1.2rem;
       text-align: center;
     }
 
     tr:hover {
-      background: #3e5a74;
+      background-color: #3e5a74;
     }
 
     .countdown {
@@ -59,55 +56,35 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      min-width: 140px;
+      min-width: 170px;
     }
 
     .countdown span {
       background: rgba(0, 0, 0, 0.2);
-      padding: 4px 8px;
+      padding: 5px 10px;
       border-radius: 10px;
       font-size: 0.9em;
     }
 
-    .countdown.exam-day {
-      background: #27ae60;
-    }
-
-    .countdown.completed {
-      background: #c0392b;
-    }
-
-    .error-message {
-      color: #dc3545;
-      font-size: 1rem;
-      margin: 20px auto;
-      max-width: 800px;
-    }
-
     @media (max-width: 600px) {
       h1 {
-        font-size: 1.8rem;
-      }
-
-      table {
-        width: 100%;
+        font-size: 1.5rem;
       }
 
       td {
-        padding: 10px;
-        font-size: 0.9rem;
+        font-size: 1rem;
+        padding: 15px;
       }
 
       .countdown {
-        padding: 6px 12px;
-        font-size: 0.8rem;
         gap: 5px;
-        min-width: 100px;
+        font-size: 0.8rem;
+        min-width: 120px;
       }
 
       .countdown span {
-        padding: 3px 6px;
-        font-size: 0.7em;
+        padding: 4px 6px;
+        font-size: 0.75em;
       }
     }
   </style>
@@ -116,22 +93,14 @@
   <h1>SSC CGL Tier-1 Countdown</h1>
 
   <div class="table-wrapper">
-    <table role="grid" aria-label="SSC exam countdown table">
+    <table>
       <tbody id="countdown-table"></tbody>
     </table>
   </div>
 
-  <div id="error-message" class="error-message" style="display: none;">
-    Unable to load exam data. Please try refreshing the page or contact support.
-  </div>
-
   <script>
-    const exams = [
-      { name: "SSC CGL Tier-1", date: "2025-08-13" }
-    ];
-
+    const exam = { name: "SSC CGL Tier-1", date: "2025-08-13" };
     const tableBody = document.getElementById("countdown-table");
-    const errorMessage = document.getElementById("error-message");
 
     function formatDateIndianStyle(dateObj) {
       const options = { day: 'numeric', month: 'long', year: 'numeric' };
@@ -140,19 +109,36 @@
     }
 
     function updateCountdown() {
-      try {
-        tableBody.innerHTML = "";
-        const now = new Date();
+      const now = new Date();
+      const examDate = new Date(exam.date + "T00:00:00");
+      const diffTime = examDate.getTime() - now.getTime();
 
-        exams.forEach(exam => {
-          const examDate = new Date(exam.date + "T00:00:00");
-          const diffTime = examDate.getTime() - now.getTime();
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      const diffHours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const diffMinutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+      const diffSeconds = Math.floor((diffTime % (1000 * 60)) / 1000);
 
-          const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-          const diffHours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          const diffMinutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+      let countdownText = "";
 
-          let countdownText = "";
-          let countdownClass = "";
+      if (diffTime > 0) {
+        countdownText = `<span>${diffDays}d</span> <span>${diffHours}h</span> <span>${diffMinutes}m</span> <span>${diffSeconds}s</span>`;
+      } else if (diffTime > -86400000) {
+        countdownText = "Exam Day!";
+      } else {
+        countdownText = "Completed";
+      }
 
-          if
+      tableBody.innerHTML = `
+        <tr>
+          <td>${exam.name}</td>
+          <td>${formatDateIndianStyle(examDate)}</td>
+          <td><span class="countdown">${countdownText}</span></td>
+        </tr>
+      `;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000); // refresh every second
+  </script>
+</body>
+</html>
