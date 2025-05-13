@@ -28,7 +28,7 @@
 
     td {
       padding: 30px;
-      font-size: 3.2rem;
+      font-size: 1.9rem; /* increased from 1.6rem */
       text-align: center;
     }
 
@@ -36,33 +36,33 @@
       font-weight: bold;
       color: #fff;
       background: linear-gradient(45deg, #3498db, #1abc9c);
-      padding: 16px 28px;
-      border-radius: 30px;
+      padding: 14px 24px;
+      border-radius: 25px;
       display: inline-flex;
       align-items: center;
-      gap: 20px;
-      font-size: 2.5rem;
+      gap: 14px;
+      font-size: 1.6rem;
     }
 
     .countdown span {
       background: rgba(0, 0, 0, 0.2);
-      padding: 12px 20px;
-      border-radius: 12px;
+      padding: 10px 16px;
+      border-radius: 10px;
     }
 
     @media (max-width: 600px) {
       td {
-        font-size: 2rem;
+        font-size: 1.3rem;
         padding: 20px;
       }
 
       .countdown {
-        gap: 12px;
-        font-size: 1.6rem;
+        gap: 8px;
+        font-size: 1rem;
       }
 
       .countdown span {
-        padding: 8px 12px;
+        padding: 6px 10px;
       }
     }
   </style>
@@ -80,7 +80,7 @@
     function formatDateIndianStyle(dateObj) {
       const options = { day: 'numeric', month: 'long', year: 'numeric' };
       const parts = dateObj.toLocaleDateString("en-IN", options).split(" ");
-      return `${parts[0]} ${parts[1]} ${parts[2]}`;
+      return `${parts[0]}<br>${parts[1]}<br>${parts[2]}`;
     }
 
     function updateCountdown() {
