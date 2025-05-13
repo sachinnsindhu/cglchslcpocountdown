@@ -18,27 +18,19 @@
       min-height: 100vh;
     }
 
-    .table-wrapper {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-
     table {
-      width: 100vw; /* Full viewport width */
-      max-width: 2000px; /* Extremely large to push borders out of sight */
+      width: 100vw; /* Full screen width */
+      max-width: 2000px;
       background-color: #34495e;
-      box-shadow: none;
       border-collapse: collapse;
       border-radius: 12px;
-      overflow: hidden;
     }
 
     td {
       padding: 30px;
       font-size: 1.8rem;
       text-align: center;
-      border-bottom: none; /* Remove internal row borders */
+      border-bottom: none;
     }
 
     .countdown {
@@ -79,11 +71,9 @@
 </head>
 <body>
 
-  <div class="table-wrapper">
-    <table>
-      <tbody id="countdown-table"></tbody>
-    </table>
-  </div>
+  <table>
+    <tbody id="countdown-table"></tbody>
+  </table>
 
   <script>
     const exam = { name: "SSC CGL Tier-1", date: "2025-08-13" };
