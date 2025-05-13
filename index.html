@@ -15,11 +15,6 @@
       padding: 20px;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 60px;
-    }
-
     .table-wrapper {
       display: flex;
       justify-content: center;
@@ -28,61 +23,64 @@
 
     table {
       border-collapse: collapse;
-      width: 100%;
-      max-width: 1000px;
+      width: 90%;
+      max-width: 800px;
       background-color: #34495e;
-      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      overflow: hidden;
     }
 
     td {
-      padding: 40px 20px;
+      padding: 25px;
+      border-bottom: 1px solid #555;
       font-size: 1.6rem;
       text-align: center;
+    }
+
+    tr:hover {
+      background-color: #3e5a74;
     }
 
     .countdown {
       font-weight: bold;
       color: #fff;
       background: linear-gradient(45deg, #3498db, #1abc9c);
-      padding: 14px 25px;
-      border-radius: 30px;
+      padding: 12px 20px;
+      border-radius: 25px;
       display: inline-flex;
       align-items: center;
-      gap: 15px;
-      font-size: 1.5rem;
+      gap: 12px;
+      min-width: 200px;
+      font-size: 1.4rem;
     }
 
     .countdown span {
       background: rgba(0, 0, 0, 0.2);
       padding: 8px 14px;
-      border-radius: 12px;
+      border-radius: 10px;
     }
 
     @media (max-width: 600px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-
       td {
-        font-size: 1.2rem;
-        padding: 20px 10px;
+        font-size: 1.1rem;
+        padding: 15px;
       }
 
       .countdown {
         gap: 8px;
         font-size: 1rem;
-        padding: 10px 16px;
+        min-width: 160px;
       }
 
       .countdown span {
         padding: 6px 10px;
-        font-size: 0.9rem;
       }
     }
   </style>
 </head>
 <body>
-  <h1>SSC CGL Tier-1 Countdown</h1>
+  <!-- Heading Removed -->
 
   <div class="table-wrapper">
     <table>
@@ -130,7 +128,7 @@
     }
 
     updateCountdown();
-    setInterval(updateCountdown, 1000);
+    setInterval(updateCountdown, 1000); // refresh every second
   </script>
 </body>
 </html>
