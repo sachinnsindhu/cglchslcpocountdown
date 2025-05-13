@@ -28,7 +28,7 @@
 
     td {
       padding: 30px;
-      font-size: 1.9rem; /* increased from 1.6rem */
+      font-size: 1.9rem;
       text-align: center;
     }
 
@@ -74,7 +74,11 @@
   </table>
 
   <script>
-    const exam = { name: "SSC CGL Tier-1", date: "2025-08-13" };
+    const exams = [
+      { name: "Mock Test - August 1", date: "2025-08-01" },
+      { name: "SSC CGL Tier-1", date: "2025-08-13" }
+    ];
+
     const tableBody = document.getElementById("countdown-table");
 
     function formatDateIndianStyle(dateObj) {
@@ -83,37 +87,42 @@
       return `${parts[0]}<br>${parts[1]}<br>${parts[2]}`;
     }
 
-    function updateCountdown() {
+    function updateCountdowns() {
       const now = new Date();
-      const examDate = new Date(exam.date + "T00:00:00");
-      const diffTime = examDate.getTime() - now.getTime();
+      tableBody.innerHTML = "";
 
-      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-      const diffHours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const diffMinutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
-      const diffSeconds = Math.floor((diffTime % (1000 * 60)) / 1000);
+      exams.forEach(exam => {
+        const examDate = new Date(exam.date + "T00:00:00");
+        const diffTime = examDate.getTime() - now.getTime();
 
-      let countdownText = "";
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        const diffHours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const diffMinutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+        const diffSeconds = Math.floor((diffTime % (1000 * 60)) / 1000);
 
-      if (diffTime > 0) {
-        countdownText = `<span>${diffDays}d</span> <span>${diffHours}h</span> <span>${diffMinutes}m</span> <span>${diffSeconds}s</span>`;
-      } else if (diffTime > -86400000) {
-        countdownText = "Exam Day!";
-      } else {
-        countdownText = "Completed";
-      }
+        let countdownText = "";
 
-      tableBody.innerHTML = `
-        <tr>
-          <td>${exam.name}</td>
-          <td>${formatDateIndianStyle(examDate)}</td>
-          <td><span class="countdown">${countdownText}</span></td>
-        </tr>
-      `;
+        if (diffTime > 0) {
+          countdownText = `<span>${diffDays}d</span> <span>${diffHours}h</span> <span>${diffMinutes}m</span> <span>${diffSeconds}s</span>`;
+        } else if (diffTime > -86400000) {
+          countdownText = "Exam Day!";
+        } else {
+          countdownText = "Completed";
+        }
+
+        const row = `
+          <tr>
+            <td>${exam.name}</td>
+            <td>${formatDateIndianStyle(examDate)}</td>
+            <td><span class="countdown">${countdownText}</span></td>
+          </tr>
+        `;
+        tableBody.innerHTML += row;
+      });
     }
 
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    updateCountdowns();
+    setInterval(updateCountdowns, 1000);
   </script>
 </body>
 </html>
