@@ -10,67 +10,67 @@
       font-family: 'Roboto', sans-serif;
       background: linear-gradient(135deg, #2c3e50, #34495e);
       color: #ecf0f1;
-      text-align: center;
       margin: 0;
       padding: 20px;
-    }
-
-    .table-wrapper {
       display: flex;
       justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .countdown-container {
+      background-color: #34495e;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      padding: 40px 30px;
+      text-align: center;
+      max-width: 700px;
       width: 100%;
     }
 
-    table {
-      border-collapse: collapse;
-      width: 90%;
-      max-width: 800px;
-      background-color: #34495e;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      border-radius: 12px;
-      overflow: hidden;
+    .exam-name {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 20px;
     }
 
-    td {
-      padding: 25px;
-      border-bottom: 1px solid #555;
-      font-size: 1.6rem;
-      text-align: center;
-    }
-
-    tr:hover {
-      background-color: #3e5a74;
+    .exam-date {
+      font-size: 1.3rem;
+      margin-bottom: 25px;
+      line-height: 1.6;
     }
 
     .countdown {
       font-weight: bold;
       color: #fff;
       background: linear-gradient(45deg, #3498db, #1abc9c);
-      padding: 12px 20px;
-      border-radius: 25px;
+      padding: 14px 22px;
+      border-radius: 30px;
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      min-width: 200px;
+      gap: 14px;
       font-size: 1.4rem;
     }
 
     .countdown span {
       background: rgba(0, 0, 0, 0.2);
       padding: 8px 14px;
-      border-radius: 10px;
+      border-radius: 12px;
     }
 
     @media (max-width: 600px) {
-      td {
-        font-size: 1.1rem;
-        padding: 15px;
+      .exam-name {
+        font-size: 1.5rem;
+      }
+
+      .exam-date {
+        font-size: 1rem;
       }
 
       .countdown {
-        gap: 8px;
         font-size: 1rem;
-        min-width: 160px;
+        gap: 10px;
+        padding: 10px 16px;
       }
 
       .countdown span {
@@ -80,17 +80,17 @@
   </style>
 </head>
 <body>
-  <!-- Heading Removed -->
 
-  <div class="table-wrapper">
-    <table>
-      <tbody id="countdown-table"></tbody>
-    </table>
+  <div class="countdown-container">
+    <div class="exam-name">SSC CGL Tier-1</div>
+    <div class="exam-date" id="exam-date"></div>
+    <div class="countdown" id="countdown-display"></div>
   </div>
 
   <script>
     const exam = { name: "SSC CGL Tier-1", date: "2025-08-13" };
-    const tableBody = document.getElementById("countdown-table");
+    const countdownDisplay = document.getElementById("countdown-display");
+    const examDateDisplay = document.getElementById("exam-date");
 
     function formatDateIndianStyle(dateObj) {
       const options = { day: 'numeric', month: 'long', year: 'numeric' };
@@ -118,17 +118,12 @@
         countdownText = "Completed";
       }
 
-      tableBody.innerHTML = `
-        <tr>
-          <td>${exam.name}</td>
-          <td>${formatDateIndianStyle(examDate)}</td>
-          <td><span class="countdown">${countdownText}</span></td>
-        </tr>
-      `;
+      examDateDisplay.innerHTML = formatDateIndianStyle(examDate);
+      countdownDisplay.innerHTML = countdownText;
     }
 
     updateCountdown();
-    setInterval(updateCountdown, 1000); // refresh every second
+    setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>
