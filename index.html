@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SSC CGL Countdown</title>
+  <title>SSC CGL Tier-1 Countdown</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     body {
@@ -11,26 +11,30 @@
       background: linear-gradient(135deg, #2c3e50, #34495e);
       color: #ecf0f1;
       margin: 0;
-      padding: 20px;
+      padding: 40px 20px;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      min-height: 100vh;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 60px;
     }
 
     table {
-      width: 100vw; /* Full screen width */
-      max-width: 2000px;
-      background-color: #34495e;
       border-collapse: collapse;
-      border-radius: 12px;
+      width: 100%;
+      max-width: 1000px;
+      background-color: transparent;
     }
 
     td {
-      padding: 30px;
-      font-size: 1.8rem;
+      padding: 25px;
+      font-size: 1.6rem;
       text-align: center;
-      border-bottom: none;
     }
 
     .countdown {
@@ -52,15 +56,18 @@
     }
 
     @media (max-width: 600px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
       td {
         font-size: 1.2rem;
-        padding: 20px;
+        padding: 15px;
       }
 
       .countdown {
         gap: 8px;
         font-size: 1rem;
-        min-width: 160px;
       }
 
       .countdown span {
@@ -70,6 +77,8 @@
   </style>
 </head>
 <body>
+
+  <h1>SSC CGL Tier-1 Countdown</h1>
 
   <table>
     <tbody id="countdown-table"></tbody>
